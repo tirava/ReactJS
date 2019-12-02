@@ -63,5 +63,4 @@ typings/
 *.pdf
 react-??.??/
 .idea/
-dist/
 

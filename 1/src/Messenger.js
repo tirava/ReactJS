@@ -1,13 +1,13 @@
 import MessageList from "./MessageList";
 import messages from "./messages";
-import Button from "./Button";
+import ButtonSend from "./ButtonSend";
 import React from "react";
 import ReactDOM from "react-dom";
 
 const Messenger = () =>
     <div className="messenger">
         <MessageList messages={messages}/>
-        <Button/>
+        <ButtonSend/>
     </div>;
 
 ReactDOM.render(<Messenger messages={messages}/>, document.getElementById("root"));

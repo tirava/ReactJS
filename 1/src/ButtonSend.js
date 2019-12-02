@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import messages from "./messages"
 import Messenger from "./Messenger";
 
-const Button = function () {
+const ButtonSend = function () {
     return (
         <button className="button" onClick={() => {
             const key = messages[messages.length - 1].id + 1;
@@ -16,4 +16,4 @@ const Button = function () {
     )
 };
 
-export default Button;
+export default ButtonSend;
