@@ -5,4 +5,7 @@ import messages from "./messages"
 import Messenger from "./Messenger";
 
 
-ReactDOM.render(<Messenger messages={messages}/>, document.getElementById("root"));
+ReactDOM.render(
+    <Messenger messages={messages}/>,
+    document.getElementById("root")
+);
