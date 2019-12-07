@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './style.sass';
-import messages from './messages';
-import Messenger from './Messenger';
+// import messages from './messages';
+// import Messenger from './Messenger';
+import {App} from './components/App';
 
 
 ReactDOM.render(
-    <Messenger messages={messages}/>,
+    <App/>,
     document.getElementById('root'),
 );

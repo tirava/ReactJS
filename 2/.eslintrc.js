@@ -11,6 +11,7 @@ module.exports = {
     'Atomics': 'readonly',
     'SharedArrayBuffer': 'readonly',
   },
+  'parser': 'babel-eslint',
   'parserOptions': {
     'ecmaFeatures': {
       'jsx': true,
@@ -20,8 +21,12 @@ module.exports = {
   },
   'plugins': [
     'react',
+    'babel'
   ],
-  'rules': {},
+  'rules': {
+    'no-invalid-this': 0,
+    'babel/no-invalid-this': 1
+  },
   'settings': {
     'react': {
       'version': 'detect'
