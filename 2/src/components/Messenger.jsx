@@ -5,37 +5,52 @@ import {SendMessage} from './SendMessage';
 
 export class Messenger extends Component {
   state = {
-    messages: [],
+    messages: [
+      {id: 0, name: 'Клим', content: 'Всем привет!'},
+      {id: 1, name: 'Клим', content: 'Как дела?'},
+    ],
     name: 'Unknown',
     content: 'Hello',
   };
 
   handleNewMessage = () => {
+    const name = this.state.name;
+    const content = this.state.content;
+    if (name === '' || content === '') {
+      alert('Заполните все поля!');
+      return false;
+    }
     this.setState((prevState) => {
       return {
         messages: prevState.messages.concat([{
           id: prevState.messages.length,
-          name: this.state.name,
-          content: this.state.content,
+          name: name,
+          content: content,
         }]),
       };
     });
   };
 
-  handleNameChange = (event) => {
-    this.setState({name: event.target.value});
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
   };
 
-  handleContentChange = (event) => {
-    this.setState({content: event.target.value});
-  };
-
-  // componentDidUpdate() {
-  //   if (this.state.messages.length % 2 === 1) {
-  //     setTimeout(() => this.setState(
-  //         {messages: [...this.state.messages, 'I`m robot']}), 1000);
-  //   }
-  // }
+  componentDidUpdate() {
+    const messages = this.state.messages;
+    const len = messages.length;
+    if (len % 2 === 1) {
+      setTimeout(() => this.setState({
+        messages: [...messages,
+          {
+            id: len,
+            name: 'Клим',
+            content: messages[len - 1].name + ', не понял',
+          }],
+      }), 1000);
+    }
+  }
 
   render() {
     return (
@@ -43,8 +58,7 @@ export class Messenger extends Component {
         <MessagesList messages={this.state.messages}/>
         <SendMessage name={this.state.name}
                      content={this.state.content}
-                     changeName={this.handleNameChange}
-                     changeContent={this.handleContentChange}/>
+                     change={this.handleChange}/>
         <SendButton click={this.handleNewMessage}/>
       </div>
     );
