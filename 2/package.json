@@ -7,8 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
     "dev": "webpack-dev-server --mode development",
+    "lintinit": "eslint --init",
     "lint": "eslint src/**/*.js src/**/*.jsx",
-    "fix": "eslint src/**/*.js src/**/*.jsx --fix"
+    "lintfix": "eslint src/**/*.js src/**/*.jsx --fix"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +36,7 @@
   },
   "dependencies": {
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "prop-types": "latest"
   }
 }
