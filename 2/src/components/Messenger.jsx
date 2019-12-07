@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {MessagesList} from './MessagesList';
 import {SendButton} from './SendButton';
+import {SendMessage} from './SendMessage';
 
 export class Messenger extends Component {
   state = {
-    messages: [
-      {id: 0, name: 'Клим', content: 'Всем привет, как дела?'},
-    ],
+    messages: [],
+    name: 'Unknown',
+    content: 'Hello',
   };
 
   handleNewMessage = () => {
@@ -14,20 +15,36 @@ export class Messenger extends Component {
       return {
         messages: prevState.messages.concat([{
           id: prevState.messages.length,
-          name: 'Robot',
-          content: 'Hello from robot',
+          name: this.state.name,
+          content: this.state.content,
         }]),
       };
     });
   };
 
+  handleNameChange = (event) => {
+    this.setState({name: event.target.value});
+  };
+
+  handleContentChange = (event) => {
+    this.setState({content: event.target.value});
+  };
+
+  // componentDidUpdate() {
+  //   if (this.state.messages.length % 2 === 1) {
+  //     setTimeout(() => this.setState(
+  //         {messages: [...this.state.messages, 'I`m robot']}), 1000);
+  //   }
+  // }
+
   render() {
     return (
       <div className='messenger'>
         <MessagesList messages={this.state.messages}/>
-        <input type="text" className='author-input'/>
-        <textarea className='message-area' cols='30' rows='2'/>
-        <br/>
+        <SendMessage name={this.state.name}
+                     content={this.state.content}
+                     changeName={this.handleNameChange}
+                     changeContent={this.handleContentChange}/>
         <SendButton click={this.handleNewMessage}/>
       </div>
     );
