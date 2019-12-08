@@ -3,15 +3,19 @@ import PropTypes from 'prop-types';
 
 export const SendMessage = (props) => {
   return (
-    <div>
-      <input className='author-input' required
-             name='name'
-             value={props.name}
-             onChange={(event) => props.change(event)}/>
-      <textarea className='message-area' cols='30' rows='2' required
-                name='content'
-                value={props.content}
-                onChange={(event) => props.change(event)}/>
+    <div className='new-message'>
+      <label>Ваше имя:
+        <input className='author-input' required
+               name='name'
+               value={props.name}
+               onChange={(event) => props.change(event)}/>
+      </label>
+      <label>Сообщение:
+        <textarea className='message-area' cols='50' rows='5' required
+                  name='content'
+                  value={props.content}
+                  onChange={(event) => props.change(event)}/>
+      </label>
     </div>
   );
 };
