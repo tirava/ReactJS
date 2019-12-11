@@ -53,11 +53,12 @@ export class Messenger extends Component {
   }
 
   render() {
+    const {messages} = this.state;
+    const {name, content} = this.state;
     return (
       <div className='messenger'>
-        <MessagesList messages={this.state.messages}/>
-        <SendMessage name={this.state.name}
-                     content={this.state.content}
+        <MessagesList messages={messages}/>
+        <SendMessage name={name} content={content}
                      change={this.handleChange}/>
         <SendButton click={this.handleNewMessage}/>
       </div>

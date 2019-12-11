@@ -1,10 +1,19 @@
-import React from 'react';
-import {Message} from './Message';
+import React, {Component} from 'react';
+import {Message, messageType} from './Message';
+import PropTypes from 'prop-types';
 
-export const MessagesList = (props) =>
-  props.messages.map((item) =>
-    <Message
-      key={item.id}
-      name={item.name}
-      content={item.content}
-    />);
+export class MessagesList extends Component {
+  static propTypes = {
+    messages: PropTypes.arrayOf(
+      PropTypes.shape(messageType),
+    ),
+  };
+
+  render() {
+    return (
+      this.props.messages.map((item, index) =>
+        <Message {...item} key={index}/>,
+      )
+    );
+  }
+}
