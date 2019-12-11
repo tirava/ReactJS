@@ -20,16 +20,13 @@ export class Messenger extends Component {
   };
 
   componentDidUpdate() {
-    const {messages} = this.state;
-    const len = messages.length;
-    if (len % 2 === 1) {
-      setTimeout(() => this.setState({
-        messages: [...messages,
-          {
-            name: 'Клим',
-            content: messages[len - 1].name + ', не понял',
-          }],
-      }), 1000);
+    const name = this.state.messages[this.state.messages.length - 1].name;
+    if (name !== 'Клим') {
+      setTimeout(() =>
+        this.sendNewMessage({
+          name: 'Клим',
+          content: name + ', не понял',
+        }), 1000);
     }
   }
 
