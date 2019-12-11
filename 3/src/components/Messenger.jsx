@@ -1,39 +1,40 @@
 import React, {Component} from 'react';
 import {MessagesList} from './MessagesList';
-import {SendButton} from './SendButton';
-import {SendMessage} from './SendMessage';
+import {MessengerForm} from './MessengerForm';
 
 export class Messenger extends Component {
   state = {
     messages: [
-      {id: 0, name: 'Клим', content: 'Всем привет!'},
-      {id: 1, name: 'Клим', content: 'Как дела?'},
+      {name: 'Клим', content: 'Всем привет!'},
+      {name: 'Клим', content: 'Как дела?'},
     ],
     name: 'Unknown',
     content: 'Hello',
   };
 
-  handleNewMessage = () => {
-    const name = this.state.name;
-    const content = this.state.content;
-    if (name === '' || content === '') {
-      alert('Заполните все поля!');
-      return false;
-    }
+  // handleNewMessage = () => {
+  //   const name = this.state.name;
+  //   const content = this.state.content;
+  //   if (name === '' || content === '') {
+  //     alert('Заполните все поля!');
+  //     return false;
+  //   }
+  //   this.setState((prevState) => {
+  //     return {
+  //       messages: prevState.messages.concat([{
+  //         id: prevState.messages.length,
+  //         name: name,
+  //         content: content,
+  //       }]),
+  //     };
+  //   });
+  // };
+
+  sendNewMessage = (message) => {
     this.setState((prevState) => {
       return {
-        messages: prevState.messages.concat([{
-          id: prevState.messages.length,
-          name: name,
-          content: content,
-        }]),
+        messages: prevState.messages.concat([message]),
       };
-    });
-  };
-
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
     });
   };
 
@@ -44,7 +45,6 @@ export class Messenger extends Component {
       setTimeout(() => this.setState({
         messages: [...messages,
           {
-            id: len,
             name: 'Клим',
             content: messages[len - 1].name + ', не понял',
           }],
@@ -54,13 +54,10 @@ export class Messenger extends Component {
 
   render() {
     const {messages} = this.state;
-    const {name, content} = this.state;
     return (
       <div className='messenger'>
         <MessagesList messages={messages}/>
-        <SendMessage name={name} content={content}
-                     change={this.handleChange}/>
-        <SendButton click={this.handleNewMessage}/>
+        <MessengerForm onSendMessage={this.sendNewMessage}/>
       </div>
     );
   }

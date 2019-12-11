@@ -13,7 +13,7 @@ export class Message extends Component {
     const {name, content} = this.props;
     return (
       <div className="user-item">
-        <span className="user-name">{name}: </span>
+        <span className="user-name">{name || 'Anonymous'}: </span>
         <span className="user-content">{content}</span>
       </div>
     );
