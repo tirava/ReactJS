@@ -13,9 +13,14 @@ export class Message extends Component {
   render() {
     const {name, content} = this.props;
     return (
-      <div className="user-item">
-        <span className="user-name">{name || 'Anonymous'}: </span>
+      <div className="user-item"
+           style={{
+             alignSelf: name === 'Клим' ?
+               'flex-start' : 'flex-end',
+           }}
+      >
         <span className="user-content">{content}</span>
+        <span className="user-name">{name || 'Anonymous'}</span>
       </div>
     );
   }

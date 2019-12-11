@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Message, messageType} from '../Message/Message';
 import PropTypes from 'prop-types';
+import './MessageList.sass';
 
 export class MessageList extends Component {
   static propTypes = {
@@ -11,9 +12,11 @@ export class MessageList extends Component {
 
   render() {
     return (
-      this.props.messages.map((item, index) =>
-        <Message {...item} key={index}/>,
-      )
+      <div className='message-list'>
+        {this.props.messages.map((item, index) =>
+          <Message {...item} key={index}/>,
+        )}
+      </div>
     );
   }
 }
