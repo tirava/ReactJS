@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {MessagesList} from './MessagesList';
-import {MessengerForm} from './MessengerForm';
+import {MessageList} from '../MessageList/MessageList';
+import {MessengerForm} from '../MessengerForm/MessengerForm';
+import './Messenger.sass';
 
 export class Messenger extends Component {
   state = {
@@ -36,7 +37,7 @@ export class Messenger extends Component {
     const {messages} = this.state;
     return (
       <div className='messenger'>
-        <MessagesList messages={messages}/>
+        <MessageList messages={messages}/>
         <MessengerForm onSendMessage={this.sendNewMessage}/>
       </div>
     );

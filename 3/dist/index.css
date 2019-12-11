@@ -1,2 +1,6 @@
-.messenger{background-color:#ddd;padding-bottom:5px}.user-item{padding-top:5px;padding-left:10px}.user-name,.author-input{color:blue;font-weight:bold}.user-content,.message-area{color:green}.button{background-color:indianred;border:none;margin-top:20px;padding:5px 10px;font-weight:bold;display:block}.button:hover{background-color:red;cursor:pointer}.new-message{display:inline-block;padding:10px}.new-message label{margin-top:15px}.new-message label,.new-message input,.new-message textarea{display:block}.author-input,.message-area{margin-top:5px}
+.user-item{padding-top:5px;padding-left:10px}.user-name{color:blue;font-weight:bold}.user-content{color:green}
+
+.new-message{display:inline-block;padding:10px}.new-message label{margin-top:15px}.new-message label,.new-message input,.new-message textarea{display:block}.author-input,.message-area{margin-top:5px}.author-input{color:blue;font-weight:bold}.message-area{color:green}.button{background-color:indianred;border:none;margin-top:20px;padding:5px 10px;font-weight:bold;display:block}.button:hover{background-color:red;cursor:pointer}
+
+.messenger{background-color:#ddd;padding-bottom:5px}
 
