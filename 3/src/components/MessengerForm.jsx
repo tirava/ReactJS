@@ -30,6 +30,12 @@ export class MessengerForm extends Component {
     });
   };
 
+  handleKeyDown = (event) => {
+    if (event.keyCode === 13 && event.ctrlKey) {
+      this.handleNewMessage();
+    }
+  };
+
   render() {
     const {author, content} = this.state;
     return (
@@ -45,7 +51,9 @@ export class MessengerForm extends Component {
                     ref={this.contentRef}
                     name='content'
                     value={content}
-                    onChange={(event) => this.handleInputChange(event)}/>
+                    onChange={(event) => this.handleInputChange(event)}
+                    onKeyDown={(event) => this.handleKeyDown(event)}
+          />
         </label>
         <button className="button" onClick={this.handleNewMessage}>
           Отправить

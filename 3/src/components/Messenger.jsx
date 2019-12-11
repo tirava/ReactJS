@@ -8,27 +8,7 @@ export class Messenger extends Component {
       {name: 'Клим', content: 'Всем привет!'},
       {name: 'Клим', content: 'Как дела?'},
     ],
-    name: 'Unknown',
-    content: 'Hello',
   };
-
-  // handleNewMessage = () => {
-  //   const name = this.state.name;
-  //   const content = this.state.content;
-  //   if (name === '' || content === '') {
-  //     alert('Заполните все поля!');
-  //     return false;
-  //   }
-  //   this.setState((prevState) => {
-  //     return {
-  //       messages: prevState.messages.concat([{
-  //         id: prevState.messages.length,
-  //         name: name,
-  //         content: content,
-  //       }]),
-  //     };
-  //   });
-  // };
 
   sendNewMessage = (message) => {
     this.setState((prevState) => {
@@ -39,7 +19,7 @@ export class Messenger extends Component {
   };
 
   componentDidUpdate() {
-    const messages = this.state.messages;
+    const {messages} = this.state;
     const len = messages.length;
     if (len % 2 === 1) {
       setTimeout(() => this.setState({
