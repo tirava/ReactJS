@@ -14,8 +14,8 @@ export class Message extends Component {
     const {name, content} = this.props;
     return (
       <div className={name === 'Клим' ? 'bot-item' : 'user-item'}>
-        <span className='user-content'>{content}</span>
         <span className='user-name'>{name || 'Anonymous'}</span>
+        <span className='user-content'>{content}</span>
       </div>
     );
   }

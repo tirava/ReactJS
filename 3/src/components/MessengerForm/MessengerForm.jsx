@@ -42,6 +42,7 @@ export class MessengerForm extends Component {
     const {author, content} = this.state;
     return (
       <div className='new-message'>
+        <div className='divider'/>
         <Input placeholder='Имя автора'
                margin='dense'
                inputProps={{'aria-label': 'description'}}
@@ -49,14 +50,16 @@ export class MessengerForm extends Component {
                value={author}
                onChange={(event) => this.handleInputChange(event)}
         />
+        <div className='divider'/>
         <TextField id='outlined-basic' label='Сообщение' variant='outlined'
-                   autoFocus margin='normal' multiline rows='2'
+                   autoFocus margin='normal'
                    inputRef={this.contentRef}
                    name='content'
                    value={content}
                    onChange={(event) => this.handleInputChange(event)}
                    onKeyDown={(event) => this.handleKeyDown(event)}
         />
+        <div className='divider'/>
         <Button variant='contained' color='primary'
                 onClick={this.handleNewMessage}>
           Отправить
