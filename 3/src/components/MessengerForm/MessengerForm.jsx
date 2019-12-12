@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './MessengerForm.sass';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
 
 export class MessengerForm extends Component {
   static propTypes = {
@@ -14,10 +17,6 @@ export class MessengerForm extends Component {
 
   contentRef = React.createRef();
 
-  componentDidMount() {
-    this.contentRef.current.focus();
-  }
-
   handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -29,6 +28,8 @@ export class MessengerForm extends Component {
       name: this.state.author,
       content: this.state.content,
     });
+    this.contentRef.current.focus();
+    this.setState({content: ''});
   };
 
   handleKeyDown = (event) => {
@@ -41,24 +42,25 @@ export class MessengerForm extends Component {
     const {author, content} = this.state;
     return (
       <div className='new-message'>
-        <label>Ваше имя:
-          <input className='author-input' required
-                 name='author'
-                 value={author}
-                 onChange={(event) => this.handleInputChange(event)}/>
-        </label>
-        <label>Сообщение:
-          <textarea className='message-area' cols='50' rows='5' required
-                    ref={this.contentRef}
-                    name='content'
-                    value={content}
-                    onChange={(event) => this.handleInputChange(event)}
-                    onKeyDown={(event) => this.handleKeyDown(event)}
-          />
-        </label>
-        <button className="button" onClick={this.handleNewMessage}>
+        <Input placeholder='Имя автора'
+               margin='dense'
+               inputProps={{'aria-label': 'description'}}
+               name='author'
+               value={author}
+               onChange={(event) => this.handleInputChange(event)}
+        />
+        <TextField id='outlined-basic' label='Сообщение' variant='outlined'
+                   autoFocus margin='normal' multiline rows='2'
+                   inputRef={this.contentRef}
+                   name='content'
+                   value={content}
+                   onChange={(event) => this.handleInputChange(event)}
+                   onKeyDown={(event) => this.handleKeyDown(event)}
+        />
+        <Button variant='contained' color='primary'
+                onClick={this.handleNewMessage}>
           Отправить
-        </button>
+        </Button>
       </div>
     );
   }

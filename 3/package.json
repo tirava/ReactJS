@@ -41,6 +41,7 @@
   "dependencies": {
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "prop-types": "latest"
+    "prop-types": "latest",
+    "@material-ui/core": "latest"
   }
 }
