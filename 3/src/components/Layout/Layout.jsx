@@ -5,13 +5,25 @@ import {ChatList} from '../ChatList/ChatList';
 import './Layout.sass';
 
 export class Layout extends Component {
+  state = {
+    chats: [],
+  };
+
+  updateChatListData = (chat) => {
+    this.setState((prevState) => {
+      return {
+        chats: prevState.chats.concat([chat]),
+      };
+    });
+  };
+
   render() {
     return (
       <div className='layout'>
         <Header/>
         <div className='chat-mess'>
-          <ChatList/>
-          <Messenger/>
+          <ChatList chats={this.state.chats}/>
+          <Messenger updateChatListData={this.updateChatListData}/>
         </div>
       </div>
     );

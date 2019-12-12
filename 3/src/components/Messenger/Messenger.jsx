@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {MessageList} from '../MessageList/MessageList';
 import {MessengerForm} from '../MessengerForm/MessengerForm';
 import './Messenger.sass';
+import PropTypes from 'prop-types';
 
 export class Messenger extends Component {
   state = {
@@ -11,12 +12,17 @@ export class Messenger extends Component {
     ],
   };
 
+  static propTypes = {
+    updateChatListData: PropTypes.func.isRequired,
+  };
+
   sendNewMessage = (message) => {
     this.setState((prevState) => {
       return {
         messages: prevState.messages.concat([message]),
       };
     });
+    this.props.updateChatListData(message.name);
   };
 
   componentDidUpdate() {
