@@ -11,23 +11,22 @@ export class ChatList extends Component {
   };
 
   renderRows = (chats) => {
-    let items = '';
-    chats.forEach((item, index) => {
-        items +=
-          <ListItem button>
-            <ListItemText primary={item} key={index}/>
-          </ListItem>;
-        // console.log(<ListItemText primary={chats[index]} key={index}/>);
-        console.log(item, index);
+    const uniqChats = new Set([]);
+    chats.forEach((chat) => {
+        uniqChats.add(chat);
       },
     );
-    console.log(items);
+
+    const items = [];
+    uniqChats.forEach((item, index) => {
+        items.push(
+          <ListItem button key={index}>
+            <ListItemText primary={item}/>
+          </ListItem>,
+        );
+      },
+    );
     return items;
-    // return (
-    //   <ListItem button>
-    //     <ListItemText primary={chats[index]} key={index}/>
-    //   </ListItem>
-    // );
   };
 
   render() {
