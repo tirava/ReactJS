@@ -20,13 +20,19 @@ export class ChatList extends Component {
     const items = [];
     uniqChats.forEach((item, index) => {
         items.push(
-          <ListItem button key={index}>
+          <ListItem button key={index}
+                    onClick={(event) => this.handleChatClick(event)}
+          >
             <ListItemText primary={item}/>
           </ListItem>,
         );
       },
     );
     return items;
+  };
+
+  handleChatClick = (event) => {
+    alert('TODO: chat for ' + event.target.innerText);
   };
 
   render() {
