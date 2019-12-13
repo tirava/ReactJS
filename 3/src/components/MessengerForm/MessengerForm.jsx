@@ -13,9 +13,15 @@ export class MessengerForm extends Component {
   state = {
     author: '',
     content: '',
+    date: '',
   };
 
   contentRef = React.createRef();
+
+  formatDate = () => {
+    const date = new Date();
+    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+  };
 
   handleInputChange = (event) => {
     this.setState({
@@ -27,6 +33,7 @@ export class MessengerForm extends Component {
     this.props.onSendMessage({
       name: this.state.author,
       content: this.state.content,
+      date: this.formatDate(),
     });
     this.contentRef.current.focus();
     this.setState({content: ''});
