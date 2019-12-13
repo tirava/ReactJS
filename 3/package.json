@@ -42,6 +42,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "prop-types": "latest",
-    "@material-ui/core": "latest"
+    "@material-ui/core": "latest",
+    "react-scroll": "latest"
   }
 }

@@ -13,6 +13,9 @@ export class ChatList extends Component {
   renderRows = (chats) => {
     const uniqChats = new Set([]);
     chats.forEach((chat) => {
+        if (chat === '') {
+          chat = 'Anonymous';
+        }
         uniqChats.add(chat);
       },
     );
