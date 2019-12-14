@@ -11,7 +11,11 @@ export class Layout extends Component {
   };
 
   static propTypes = {
-    chatname: PropTypes.string,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        chatname: PropTypes.string,
+      }),
+    }),
   };
 
   updateChatListData = (chat) => {
@@ -23,11 +27,13 @@ export class Layout extends Component {
   };
 
   render() {
+    const {chats} = this.state;
+    const {chatname} = this.props.match.params;
     return (
       <div className='layout'>
-        <Header chatname={this.props.chatname || 'Anonymous'}/>
+        <Header chatname={chatname || 'Anonymous'}/>
         <div className='chat-mess'>
-          <ChatList chats={this.state.chats}/>
+          <ChatList chats={chats}/>
           <Messenger updateChatListData={this.updateChatListData}/>
         </div>
       </div>

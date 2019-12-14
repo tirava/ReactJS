@@ -32,8 +32,11 @@ export class Messenger extends Component {
   };
 
   componentDidUpdate() {
-    const name = this.state.messages[this.state.messages.length - 1].name;
-    // const name = this.state.messages[0].name;
+    const len = this.state.messages.length;
+    if (len === 0) {
+      return;
+    }
+    const name = this.state.messages[len - 1].name;
     if (name !== 'Клим') {
       setTimeout(() =>
         this.sendNewMessage({

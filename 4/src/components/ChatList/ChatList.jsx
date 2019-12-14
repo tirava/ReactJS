@@ -41,6 +41,8 @@ export class ChatList extends Component {
   };
 
   handleChatClick = () => {
+    // console.log(event.target);
+    // event.target.selected = true;
     // alert('TODO: chat for ' + event.target.innerText);
   };
 
