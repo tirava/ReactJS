@@ -7,8 +7,8 @@ export class Router extends Component {
     return (
       <Switch>
         <Route exact path='/' component={Layout}/>
-        <Route exact path='/chat/:username' render={() =>
-          <Layout username={username}/>}
+        <Route exact path='/chat/:chatname' render={(props) =>
+          <Layout chatname={props.match.params.chatname}/>}
         />
       </Switch>
     );

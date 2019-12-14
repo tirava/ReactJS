@@ -40,8 +40,8 @@ export class ChatList extends Component {
     return items;
   };
 
-  handleChatClick = (event) => {
-    alert('TODO: chat for ' + event.target.innerText);
+  handleChatClick = () => {
+    // alert('TODO: chat for ' + event.target.innerText);
   };
 
   render() {

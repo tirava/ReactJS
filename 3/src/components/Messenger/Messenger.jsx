@@ -12,8 +12,8 @@ export class Messenger extends Component {
 
   state = {
     messages: [
-      {name: 'Клим', content: 'Всем привет!', date: this.formatDate()},
-      {name: 'Клим', content: 'Как дела?', date: this.formatDate()},
+      // {name: 'Клим', content: 'Всем привет!', date: this.formatDate()},
+      // {name: 'Клим', content: 'Как дела?', date: this.formatDate()},
     ],
   };
 
