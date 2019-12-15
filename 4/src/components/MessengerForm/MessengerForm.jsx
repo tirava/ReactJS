@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {formatDate} from '../utils';
 import './MessengerForm.sass';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
@@ -18,11 +19,6 @@ export class MessengerForm extends Component {
 
   contentRef = React.createRef();
 
-  formatDate = () => {
-    const date = new Date();
-    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
-  };
-
   handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -33,7 +29,7 @@ export class MessengerForm extends Component {
     this.props.onSendMessage({
       name: this.state.author,
       content: this.state.content,
-      date: this.formatDate(),
+      date: formatDate(),
     });
     this.contentRef.current.focus();
     this.setState({content: ''});

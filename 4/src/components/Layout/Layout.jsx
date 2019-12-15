@@ -3,14 +3,10 @@ import {Messenger} from '../Messenger/Messenger';
 import {Header} from '../Header/Header';
 import {ChatList} from '../ChatList/ChatList';
 import PropTypes from 'prop-types';
+import {formatDate} from '../utils';
 import './Layout.sass';
 
 export class Layout extends Component {
-  formatDate = () => {
-    const date = new Date();
-    return date.toLocaleDateString() + '  ' + date.toLocaleTimeString();
-  };
-
   state = {
     chats: {
       1: {
@@ -18,7 +14,7 @@ export class Layout extends Component {
           {
             name: 'Клим',
             content: 'Привет! Вы в чатике \"111 222\"',
-            date: this.formatDate(),
+            date: formatDate(),
           },
         ],
       },
@@ -27,7 +23,7 @@ export class Layout extends Component {
           {
             name: 'Клим',
             content: 'Привет!Вы в чатике \"333 444\"',
-            date: this.formatDate(),
+            date: formatDate(),
           },
         ],
       },

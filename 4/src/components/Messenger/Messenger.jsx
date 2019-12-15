@@ -2,14 +2,10 @@ import React, {Component} from 'react';
 import {MessageList} from '../MessageList/MessageList';
 import {MessengerForm} from '../MessengerForm/MessengerForm';
 import './Messenger.sass';
+import {formatDate} from '../utils';
 import PropTypes from 'prop-types';
 
 export class Messenger extends Component {
-  formatDate = () => {
-    const date = new Date();
-    return date.toLocaleDateString() + '  ' + date.toLocaleTimeString();
-  };
-
   static propTypes = {
     messages: PropTypes.array.isRequired,
     addNewMessage: PropTypes.func.isRequired,
@@ -33,7 +29,7 @@ export class Messenger extends Component {
         this.sendNewMessage({
           name: 'Клим',
           content: name + ', не понял',
-          date: this.formatDate(),
+          date: formatDate(),
         }), 1000);
     }
   }
