@@ -10,19 +10,19 @@ export class Layout extends Component {
   state = {
     chats: {
       1: {
-        name: '111 222', messages: [
+        name: 'Урок №1', messages: [
           {
             name: 'Клим',
-            content: 'Привет! Вы в чатике \"111 222\"',
+            content: 'Привет! Вы в чатике \"Урока №1\"',
             date: formatDate(),
           },
         ],
       },
       2: {
-        name: '333 444', messages: [
+        name: 'Урок №2', messages: [
           {
             name: 'Клим',
-            content: 'Привет!Вы в чатике \"333 444\"',
+            content: 'Привет!Вы в чатике \"Урока №2\"',
             date: formatDate(),
           },
         ],
@@ -54,9 +54,9 @@ export class Layout extends Component {
     }
     return (
       <div className='layout'>
-        <Header chatName={chats[id].name}/>
+        <Header chatId={id} chatName={chats[id].name}/>
         <div className='chat-mess'>
-          <ChatList chats={chats}/>
+          <ChatList chatId={id} chats={chats}/>
           <Messenger chatId={id}
                      messages={chats[id].messages}
                      addNewMessage={this.addNewMessage}/>

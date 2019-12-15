@@ -11,16 +11,18 @@ import PropTypes from 'prop-types';
 export class ChatList extends Component {
   static propTypes = {
     chats: PropTypes.object,
+    chatId: PropTypes.string,
   };
 
   renderRows = (chats) => {
+    const {chatId} = this.props;
     const items = [];
     for (const [id, chat] of Object.entries(chats)) {
       const link = '/chat/' + id;
+      const selected = (chatId === '' + id);
       items.push(
         <Link className='chat-link' to={link} key={id}>
-          <ListItem button key={id}
-                    onClick={(event) => this.handleChatClick(event)}>
+          <ListItem button key={id} selected={selected}>
             <ListItemIcon><SendIcon/></ListItemIcon>
             <ListItemText primary={chat.name}/>
           </ListItem>
@@ -28,12 +30,6 @@ export class ChatList extends Component {
       );
     }
     return items;
-  };
-
-  handleChatClick = () => {
-    // console.log(event.target);
-    // event.target.selected = true;
-    // alert('TODO: chat for ' + event.target.innerText);
   };
 
   render() {
