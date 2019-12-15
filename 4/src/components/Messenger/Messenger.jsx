@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {MessageList} from '../MessageList/MessageList';
 import {MessengerForm} from '../MessengerForm/MessengerForm';
 import './Messenger.sass';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 export class Messenger extends Component {
   formatDate = () => {
@@ -17,9 +17,9 @@ export class Messenger extends Component {
     ],
   };
 
-  static propTypes = {
-    updateChatListData: PropTypes.func.isRequired,
-  };
+  // static propTypes = {
+  //   updateChatList: PropTypes.func.isRequired,
+  // };
 
   sendNewMessage = (message) => {
     this.setState((prevState) => {
@@ -28,7 +28,7 @@ export class Messenger extends Component {
         // messages: [message].concat(...prevState.messages),
       };
     });
-    this.props.updateChatListData(message.name);
+    // this.props.updateChatListData(message.name);
   };
 
   componentDidUpdate() {

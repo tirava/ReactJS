@@ -4,14 +4,14 @@ import './Header.sass';
 
 export class Header extends Component {
   static propTypes = {
-    chatname: PropTypes.string,
+    chatName: PropTypes.string,
   };
 
   render() {
     return (
       <div className='header'>
         <h2>Наш супер-пупер чатик )</h2>
-        <span className='chatname'>{this.props.chatname}</span>
+        <span className='chatname'>{this.props.chatName}</span>
       </div>
     );
   }

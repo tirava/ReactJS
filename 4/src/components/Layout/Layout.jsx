@@ -7,34 +7,48 @@ import './Layout.sass';
 
 export class Layout extends Component {
   state = {
-    chats: [],
+    chats: {
+      1: {
+        name: '111 222', messages: [],
+      },
+      2: {
+        name: '333 444', messages: [],
+      },
+    },
   };
 
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.shape({
-        chatname: PropTypes.string,
+        id: PropTypes.string,
       }),
     }),
   };
 
-  updateChatListData = (chat) => {
-    this.setState((prevState) => {
-      return {
-        chats: prevState.chats.concat([chat]),
-      };
-    });
+  static defaultProps = {
+    id: 1,
   };
+
+  // updateChatList = (chat) => {
+  //   this.setState((prevState) => {
+  //     return {
+  //       chats: prevState.chats.concat([chat]),
+  //     };
+  //   });
+  // };
 
   render() {
     const {chats} = this.state;
-    const {chatname} = this.props.match.params;
+    let {id} = this.props.match.params;
+    if (id === undefined || id > Object.keys(chats).length) {
+      id = 1;
+    }
     return (
       <div className='layout'>
-        <Header chatname={chatname || 'Anonymous'}/>
+        <Header chatName={chats[id].name}/>
         <div className='chat-mess'>
           <ChatList chats={chats}/>
-          <Messenger updateChatListData={this.updateChatListData}/>
+          <Messenger chats={chats[id]}/>
         </div>
       </div>
     );

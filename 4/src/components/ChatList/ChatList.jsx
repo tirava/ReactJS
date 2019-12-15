@@ -10,33 +10,23 @@ import PropTypes from 'prop-types';
 
 export class ChatList extends Component {
   static propTypes = {
-    chats: PropTypes.array,
+    chats: PropTypes.object,
   };
 
   renderRows = (chats) => {
-    const uniqChats = new Set([]);
-    chats.forEach((chat) => {
-        if (chat === '') {
-          chat = 'Anonymous';
-        }
-        uniqChats.add(chat);
-      },
-    );
-
     const items = [];
-    uniqChats.forEach((item, index) => {
-        const link = '/chat/' + item;
-        items.push(
-          <Link className='chat-link' to={link} key={index}>
-            <ListItem button key={index}
-                      onClick={(event) => this.handleChatClick(event)}>
-              <ListItemIcon><SendIcon/></ListItemIcon>
-              <ListItemText primary={item}/>
-            </ListItem>
-          </Link>,
-        );
-      },
-    );
+    for (const [id, chat] of Object.entries(chats)) {
+      const link = '/chat/' + id;
+      items.push(
+        <Link className='chat-link' to={link} key={id}>
+          <ListItem button key={id}
+                    onClick={(event) => this.handleChatClick(event)}>
+            <ListItemIcon><SendIcon/></ListItemIcon>
+            <ListItemText primary={chat.name}/>
+          </ListItem>
+        </Link>,
+      );
+    }
     return items;
   };
 
