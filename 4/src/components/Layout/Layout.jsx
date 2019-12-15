@@ -13,7 +13,7 @@ export class Layout extends Component {
         name: 'Урок №1', messages: [
           {
             name: 'Клим',
-            content: 'Привет! Вы в чатике \"Урока №1\"',
+            content: 'Привет! Вы в чатике \"Урок №1\"',
             date: formatDate(),
           },
         ],
@@ -22,7 +22,7 @@ export class Layout extends Component {
         name: 'Урок №2', messages: [
           {
             name: 'Клим',
-            content: 'Привет!Вы в чатике \"Урока №2\"',
+            content: 'Привет!Вы в чатике \"Урок №2\"',
             date: formatDate(),
           },
         ],
@@ -46,6 +46,28 @@ export class Layout extends Component {
     });
   };
 
+  addNewChat = (name) => {
+    this.setState((prevState) => {
+      const chats = prevState.chats;
+      for (const chat of Object.entries(chats)) {
+        if (chat[1].name === name || name === '') {
+          alert('Недопустимое имя чата!');
+          return null;
+        }
+      }
+      chats[Object.keys(chats).length + 1] = {
+        name: name,
+        messages: [
+          {
+            name: 'Клим',
+            content: `Привет! Вы в чатике \"${name}\"`,
+            date: formatDate(),
+          }],
+      };
+      return {chats};
+    });
+  };
+
   render() {
     const {chats} = this.state;
     let {id} = this.props.match.params;
@@ -56,7 +78,8 @@ export class Layout extends Component {
       <div className='layout'>
         <Header chatId={id} chatName={chats[id].name}/>
         <div className='chat-mess'>
-          <ChatList chatId={id} chats={chats}/>
+          <ChatList chatId={id} chats={chats}
+                    addNewChat={this.addNewChat}/>
           <Messenger chatId={id} chatName={chats[id].name}
                      messages={chats[id].messages}
                      addNewMessage={this.addNewMessage}/>

@@ -7,11 +7,13 @@ import SendIcon from '@material-ui/icons/Send';
 import {Link} from 'react-router-dom';
 import './ChatList.sass';
 import PropTypes from 'prop-types';
+import {ChatForm} from '../ChatForm/ChatForm';
 
 export class ChatList extends Component {
   static propTypes = {
     chats: PropTypes.object,
     chatId: PropTypes.string,
+    addNewChat: PropTypes.func.isRequired,
   };
 
   renderRows = (chats) => {
@@ -38,6 +40,7 @@ export class ChatList extends Component {
         <List component="nav" aria-label="main mailbox folders">
           {this.renderRows(this.props.chats)}
         </List>
+        <ChatForm onSendChat={this.props.addNewChat}/>
       </div>
     );
   }
