@@ -52,5 +52,5 @@ module.exports = {
     port: 8080,
     historyApiFallback: true,
   },
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
 };

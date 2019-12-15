@@ -57,7 +57,7 @@ export class Layout extends Component {
         <Header chatId={id} chatName={chats[id].name}/>
         <div className='chat-mess'>
           <ChatList chatId={id} chats={chats}/>
-          <Messenger chatId={id}
+          <Messenger chatId={id} chatName={chats[id].name}
                      messages={chats[id].messages}
                      addNewMessage={this.addNewMessage}/>
         </div>

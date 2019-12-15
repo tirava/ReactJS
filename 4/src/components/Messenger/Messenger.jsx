@@ -6,31 +6,51 @@ import {formatDate} from '../utils';
 import PropTypes from 'prop-types';
 
 export class Messenger extends Component {
+  state = {
+    chatId: '1',
+  };
+
   static propTypes = {
     messages: PropTypes.array.isRequired,
     addNewMessage: PropTypes.func.isRequired,
     chatId: PropTypes.string,
+    chatName: PropTypes.string,
   };
 
+  botTimers = [];
+
   sendNewMessage = (message) => {
+    this.botTimers.forEach((timer) => clearTimeout(timer));
+    this.botTimers = [];
     const {chatId} = this.props;
     this.props.addNewMessage(chatId, message);
   };
 
   componentDidUpdate() {
-    const {messages} = this.props;
+    const {chatId, chatName, messages} = this.props;
     const len = messages.length;
     if (len === 0) {
       return;
     }
+
+    if (this.state.chatId !== chatId) {
+      this.botTimers.forEach((timer) => clearTimeout(timer));
+      this.botTimers = [];
+    }
+    this.setState((prevState) => {
+      prevState.chatId = chatId;
+    });
+
     const name = messages[len - 1].name;
     if (name !== 'Клим') {
-      setTimeout(() =>
-        this.sendNewMessage({
-          name: 'Клим',
-          content: name + ', не понял',
-          date: formatDate(),
-        }), 1000);
+      this.botTimers.push(
+        setTimeout(() =>
+          this.sendNewMessage({
+            name: 'Клим',
+            content: `${name}, не понял, здесь чат "${chatName}"`,
+            date: formatDate(),
+          }), 1000),
+      );
     }
   }
 
