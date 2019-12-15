@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom';
 import './ChatList.sass';
 import PropTypes from 'prop-types';
 import {ChatForm} from '../ChatForm/ChatForm';
+import {animateScroll} from 'react-scroll';
 
 export class ChatList extends Component {
   static propTypes = {
@@ -15,6 +16,20 @@ export class ChatList extends Component {
     chatId: PropTypes.string,
     addNewChat: PropTypes.func.isRequired,
   };
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    animateScroll.scrollToBottom({
+      containerId: 'chat-list',
+    });
+  }
 
   renderRows = (chats) => {
     const {chatId} = this.props;
@@ -36,10 +51,12 @@ export class ChatList extends Component {
 
   render() {
     return (
-      <div className='chat-list'>
-        <List component="nav" aria-label="main mailbox folders">
-          {this.renderRows(this.props.chats)}
-        </List>
+      <div className='chat-list-form'>
+        <div className='chat-list' id='chat-list'>
+          <List component="nav" aria-label="main mailbox folders">
+            {this.renderRows(this.props.chats)}
+          </List>
+        </div>
         <ChatForm onSendChat={this.props.addNewChat}/>
       </div>
     );

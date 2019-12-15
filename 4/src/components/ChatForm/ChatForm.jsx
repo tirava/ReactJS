@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-// import './ChatForm.sass';
+import './ChatForm.sass';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 
@@ -45,6 +45,7 @@ export class ChatForm extends Component {
                onChange={(event) => this.handleInputChange(event)}
                onKeyDown={(event) => this.handleKeyDown(event)}
         />
+        <div className='separator'/>
         <Button variant='contained' color='primary'
                 onClick={this.handleNewChat}>
           Создать

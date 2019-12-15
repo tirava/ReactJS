@@ -1,10 +1,8 @@
 @import ../vars
 
 .chat-list
-  flex-basis: 30%
-  border: 1px solid #888
-  background-color: #eeffee
-  height: $chat-height
+  background-color: #ddffdd
+  height: $chat-height - 105px
   overflow-y: auto
 
 .chat-link
@@ -14,4 +12,8 @@
   &:hover
     color: grey
 
-
+.chat-list-form
+  display: flex
+  flex-direction: column
+  flex-basis: 30%
+  border: 1px solid #888
