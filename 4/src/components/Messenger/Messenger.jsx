@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {MessageList} from '../MessageList/MessageList';
 import {MessengerForm} from '../MessengerForm/MessengerForm';
 import './Messenger.sass';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export class Messenger extends Component {
   formatDate = () => {
@@ -10,33 +10,24 @@ export class Messenger extends Component {
     return date.toLocaleDateString() + '  ' + date.toLocaleTimeString();
   };
 
-  state = {
-    messages: [
-      // {name: 'Клим', content: 'Всем привет!', date: this.formatDate()},
-      // {name: 'Клим', content: 'Как дела?', date: this.formatDate()},
-    ],
+  static propTypes = {
+    messages: PropTypes.array.isRequired,
+    addNewMessage: PropTypes.func.isRequired,
+    chatId: PropTypes.string,
   };
 
-  // static propTypes = {
-  //   updateChatList: PropTypes.func.isRequired,
-  // };
-
   sendNewMessage = (message) => {
-    this.setState((prevState) => {
-      return {
-        messages: prevState.messages.concat([message]),
-        // messages: [message].concat(...prevState.messages),
-      };
-    });
-    // this.props.updateChatListData(message.name);
+    const {chatId} = this.props;
+    this.props.addNewMessage(chatId, message);
   };
 
   componentDidUpdate() {
-    const len = this.state.messages.length;
+    const {messages} = this.props;
+    const len = messages.length;
     if (len === 0) {
       return;
     }
-    const name = this.state.messages[len - 1].name;
+    const name = messages[len - 1].name;
     if (name !== 'Клим') {
       setTimeout(() =>
         this.sendNewMessage({
@@ -48,7 +39,7 @@ export class Messenger extends Component {
   }
 
   render() {
-    const {messages} = this.state;
+    const {messages} = this.props;
     return (
       <div className='messenger'>
         <MessageList messages={messages}/>
