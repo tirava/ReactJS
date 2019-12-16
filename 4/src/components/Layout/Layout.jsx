@@ -7,28 +7,6 @@ import {formatDate} from '../utils';
 import './Layout.sass';
 
 export class Layout extends Component {
-  // state = {
-  //   chats: {
-  //     1: {
-  //       name: 'Урок №1', messages: [
-  //         {
-  //           name: 'Клим',
-  //           content: 'Привет! Вы в чатике \"Урок №1\"',
-  //           date: formatDate(),
-  //         },
-  //       ],
-  //     },
-  //     2: {
-  //       name: 'Урок №2', messages: [
-  //         {
-  //           name: 'Клим',
-  //           content: 'Привет! Вы в чатике \"Урок №2\"',
-  //           date: formatDate(),
-  //         },
-  //       ],
-  //     },
-  //   },
-  // };
   state = {
     chats: {
       1: {title: 'Урок №1', messageList: [1, 2]},
@@ -71,6 +49,13 @@ export class Layout extends Component {
       const {chats, messages} = prevState;
       const messageId = Object.keys(messages).length + 1;
       return {
+        chats: {
+          ...chats,
+          [chatId]: {
+            ...chats[chatId],
+            messageList: [...chats[chatId]['messageList'], messageId],
+          },
+        },
         messages: {
           ...messages,
           [messageId]: {
@@ -79,36 +64,32 @@ export class Layout extends Component {
             date: message.date,
           },
         },
-        chats: {
-          ...chats,
-          [chatId]: {
-            ...chats[chatId],
-            messageList: [...chats[chatId]['messageList'], messageId],
-          },
-        },
       };
     });
   };
 
-  addNewChat = (name) => {
+  addNewChat = (title) => {
     this.setState((prevState) => {
-      const chats = prevState.chats;
+      const {chats, messages} = prevState;
       for (const chat of Object.entries(chats)) {
-        if (chat[1].name === name || name === '') {
+        if (chat[1].title === title || title === '') {
           alert('Недопустимое имя чата!');
           return null;
         }
       }
-      chats[Object.keys(chats).length + 1] = {
-        name: name,
-        messages: [
-          {
-            name: 'Клим',
-            content: `Привет! Вы в чатике \"${name}\"`,
+      const chatId = Object.keys(chats).length + 1;
+      const messageId = Object.keys(messages).length + 1;
+      return {
+        chats: {...chats, [chatId]: {title: title, messageList: [messageId]}},
+        messages: {
+          ...messages,
+          [messageId]: {
+            author: 'Клим',
+            content: `Привет! Вы в чатике \"${title}\"`,
             date: formatDate(),
-          }],
+          },
+        },
       };
-      return {chats};
     });
   };
 
