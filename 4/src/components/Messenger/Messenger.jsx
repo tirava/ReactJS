@@ -46,7 +46,7 @@ export class Messenger extends Component {
       this.botTimers.push(
         setTimeout(() =>
           this.sendNewMessage({
-            name: 'Клим',
+            author: 'Клим',
             content: `${name}, не понял, здесь чат "${chatName}"`,
             date: formatDate(),
           }), 1000),

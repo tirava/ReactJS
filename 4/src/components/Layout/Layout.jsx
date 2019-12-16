@@ -68,9 +68,25 @@ export class Layout extends Component {
 
   addNewMessage = (chatId, message) => {
     this.setState((prevState) => {
-      const chat = prevState.chats[chatId];
-      chat.messages = chat.messages.concat([message]);
-      return {chat};
+      const {chats, messages} = prevState;
+      const messageId = Object.keys(messages).length + 1;
+      return {
+        messages: {
+          ...messages,
+          [messageId]: {
+            author: message.author,
+            content: message.content,
+            date: message.date,
+          },
+        },
+        chats: {
+          ...chats,
+          [chatId]: {
+            ...chats[chatId],
+            messageList: [...chats[chatId]['messageList'], messageId],
+          },
+        },
+      };
     });
   };
 

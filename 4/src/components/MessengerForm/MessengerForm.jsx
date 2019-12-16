@@ -27,7 +27,7 @@ export class MessengerForm extends Component {
 
   handleNewMessage = () => {
     this.props.onSendMessage({
-      name: this.state.author,
+      author: this.state.author,
       content: this.state.content,
       date: formatDate(),
     });
