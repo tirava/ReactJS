@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Message.sass';
 
 export const messageType = {
-  name: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
 };
@@ -12,10 +12,10 @@ export class Message extends Component {
   static propTypes = messageType;
 
   render() {
-    const {name, content, date} = this.props;
+    const {author, content, date} = this.props;
     return (
-      <div className={name === 'Клим' ? 'bot-item' : 'user-item'}>
-        <span className='user-name'>{name || 'Anonymous'}</span>
+      <div className={author === 'Клим' ? 'bot-item' : 'user-item'}>
+        <span className='user-name'>{author || 'Anonymous'}</span>
         <span className='user-date'>{date}</span>
         <span className='user-content'>{content}</span>
       </div>

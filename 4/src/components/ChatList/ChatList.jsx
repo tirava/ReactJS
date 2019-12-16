@@ -41,7 +41,7 @@ export class ChatList extends Component {
         <Link className='chat-link' to={link} key={id}>
           <ListItem button key={id} selected={selected}>
             <ListItemIcon><SendIcon/></ListItemIcon>
-            <ListItemText primary={chat.name}/>
+            <ListItemText primary={chat.title}/>
           </ListItem>
         </Link>,
       );

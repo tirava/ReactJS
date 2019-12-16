@@ -7,25 +7,53 @@ import {formatDate} from '../utils';
 import './Layout.sass';
 
 export class Layout extends Component {
+  // state = {
+  //   chats: {
+  //     1: {
+  //       name: 'Урок №1', messages: [
+  //         {
+  //           name: 'Клим',
+  //           content: 'Привет! Вы в чатике \"Урок №1\"',
+  //           date: formatDate(),
+  //         },
+  //       ],
+  //     },
+  //     2: {
+  //       name: 'Урок №2', messages: [
+  //         {
+  //           name: 'Клим',
+  //           content: 'Привет! Вы в чатике \"Урок №2\"',
+  //           date: formatDate(),
+  //         },
+  //       ],
+  //     },
+  //   },
+  // };
   state = {
     chats: {
+      1: {title: 'Урок №1', messageList: [1, 2]},
+      2: {title: 'Урок №2', messageList: [3, 4]},
+    },
+    messages: {
       1: {
-        name: 'Урок №1', messages: [
-          {
-            name: 'Клим',
-            content: 'Привет! Вы в чатике \"Урок №1\"',
-            date: formatDate(),
-          },
-        ],
+        author: 'Клим',
+        content: 'Привет!',
+        date: formatDate(),
       },
       2: {
-        name: 'Урок №2', messages: [
-          {
-            name: 'Клим',
-            content: 'Привет!Вы в чатике \"Урок №2\"',
-            date: formatDate(),
-          },
-        ],
+        author: 'Клим',
+        content: 'Вы в чатике \"Урок №1\"',
+        date: formatDate(),
+      },
+      3: {
+        author: 'Клим',
+        content: 'Привет!',
+        date: formatDate(),
+      },
+      4: {
+        author: 'Клим',
+        content: 'Вы в чатике \"Урок №2\"',
+        date: formatDate(),
       },
     },
   };
@@ -69,19 +97,24 @@ export class Layout extends Component {
   };
 
   render() {
-    const {chats} = this.state;
+    const {chats, messages} = this.state;
     let {id} = this.props.match.params;
     if (id === undefined || id > Object.keys(chats).length) {
       id = '1';
     }
+
+    const chatMessages = chats[id].messageList.map((messageId) => (
+      messages[messageId]
+    ));
+
     return (
       <div className='layout'>
-        <Header chatId={id} chatName={chats[id].name}/>
+        <Header chatId={id} chatName={chats[id].title}/>
         <div className='chat-mess'>
           <ChatList chatId={id} chats={chats}
                     addNewChat={this.addNewChat}/>
-          <Messenger chatId={id} chatName={chats[id].name}
-                     messages={chats[id].messages}
+          <Messenger chatId={id} chatName={chats[id].title}
+                     messages={chatMessages}
                      addNewMessage={this.addNewMessage}/>
         </div>
       </div>

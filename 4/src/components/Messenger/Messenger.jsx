@@ -41,7 +41,7 @@ export class Messenger extends Component {
       prevState.chatId = chatId;
     });
 
-    const name = messages[len - 1].name;
+    const name = messages[len - 1].author;
     if (name !== 'Клим') {
       this.botTimers.push(
         setTimeout(() =>

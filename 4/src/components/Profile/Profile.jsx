@@ -4,12 +4,8 @@ import PropTypes from 'prop-types';
 export class Profile extends Component {
   state = {
     profiles: {
-      1: {
-        name: 'Урок №1', description: 'Введение в JavaScript',
-      },
-      2: {
-        name: 'Урок №2', description: 'Погружение в React',
-      },
+      1: {title: 'Урок №1', description: 'Введение в JavaScript'},
+      2: {title: 'Урок №2', description: 'Погружение в React'},
     },
   };
 
@@ -32,11 +28,11 @@ export class Profile extends Component {
         </div>
       );
     }
-    const {name, description} = this.state.profiles[id];
+    const {title, description} = this.state.profiles[id];
     return (
       <div>
         <h2>Профиль чата #{id}</h2>
-        <h3>{name}</h3>
+        <h3>{title}</h3>
         <h4>{description}</h4>
       </div>
     );
