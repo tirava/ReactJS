@@ -47,6 +47,7 @@
     "react-scroll": "latest",
     "react-router-dom": "latest",
     "redux": "latest",
-    "react-addons-update": "latest"
+    "react-addons-update": "latest",
+    "react-redux": "latest"
   }
 }

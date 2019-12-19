@@ -4,6 +4,8 @@ import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import initStore from '../utils/store';
 
+// const store = initStore();
+
 export class App extends Component {
   render() {
     return (

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-// import {bindActionCreators} from 'redux';
-// import connect from 'react-redux/es/connect/connect';
+import {bindActionCreators} from 'redux';
+// import {connect} from 'react-redux';
+import connect from 'react-redux/es/connect/connect';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -11,13 +12,13 @@ import './ChatList.sass';
 import PropTypes from 'prop-types';
 import {ChatForm} from '../ChatForm/ChatForm';
 import {animateScroll} from 'react-scroll';
-// import {addChat} from '../../actions/chatActions';
+import {addChat} from '../../actions/chatActions';
 
-export class ChatList extends Component {
+class ChatList extends Component {
   static propTypes = {
     chats: PropTypes.object.isRequired,
-    chatId: PropTypes.string,
-    addNewChat: PropTypes.func.isRequired,
+    // chatId: PropTypes.string,
+    addChat: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -35,11 +36,12 @@ export class ChatList extends Component {
   }
 
   renderRows = (chats) => {
-    const {chatId} = this.props;
+    // const {chatId} = this.props;
     const items = [];
     for (const [id, chat] of Object.entries(chats)) {
       const link = '/chat/' + id;
-      const selected = (chatId === '' + id);
+      // const selected = (chatId === '' + id);
+      const selected = false;
       items.push(
         <Link className='chat-link' to={link} key={id}>
           <ListItem button key={id} selected={selected}>
@@ -60,8 +62,17 @@ export class ChatList extends Component {
             {this.renderRows(this.props.chats)}
           </List>
         </div>
-        <ChatForm onSendChat={this.props.addNewChat}/>
+        <ChatForm onSendChat={this.props.addChat}/>
       </div>
     );
   }
 }
+
+const mapStateToProps = ({chatReducer}) => ({
+  chats: chatReducer.chats,
+});
+
+const mapDispatchProps = (dispatch) =>
+  bindActionCreators({addChat}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchProps)(ChatList);
