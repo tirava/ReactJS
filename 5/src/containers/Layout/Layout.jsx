@@ -5,41 +5,10 @@ import {Messenger} from '../../components/Messenger/Messenger';
 import {Header} from '../../components/Header/Header';
 import ChatList from '../ChatList/ChatList';
 import PropTypes from 'prop-types';
-import {formatDate} from '../../utils/utils';
 import {sendMessage} from '../../actions/messageActions';
 import './Layout.sass';
 
 class Layout extends Component {
-  state = {
-    messages: {
-      1: {
-        author: 'Клим',
-        content: 'Привет!',
-        date: formatDate(),
-      },
-      2: {
-        author: 'Клим',
-        content: 'Вы в чатике \"Урок №1\"',
-        date: formatDate(),
-      },
-      3: {
-        author: 'Клим',
-        content: 'Привет!',
-        date: formatDate(),
-      },
-      4: {
-        author: 'Клим',
-        content: 'Вы в чатике \"Урок №2\"',
-        date: formatDate(),
-      },
-      5: {
-        author: 'Клим',
-        content: 'Приветик! Вы в чатике \"Урок №3\"',
-        date: formatDate(),
-      },
-    },
-  };
-
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.shape({
@@ -48,6 +17,7 @@ class Layout extends Component {
     }),
     chatId: PropTypes.string,
     chats: PropTypes.object.isRequired,
+    messages: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,
   };
 
@@ -76,7 +46,7 @@ class Layout extends Component {
   // };
 
   sendMessage = (chatId, message) => {
-    const {messages} = this.state;
+    const {messages} = this.props;
     const {author, content, date} = message;
     const messageId = Object.keys(messages).length + 1;
     this.setState({
@@ -125,8 +95,7 @@ class Layout extends Component {
   // };
 
   render() {
-    const {messages} = this.state;
-    const {chats} = this.props;
+    const {chats, messages} = this.props;
     let {id} = this.props.match.params;
     if (id === undefined || id > Object.keys(chats).length) {
       id = '1';
@@ -150,8 +119,9 @@ class Layout extends Component {
   }
 }
 
-const mapStateToProps = ({chatReducer}) => ({
+const mapStateToProps = ({chatReducer, messageReducer}) => ({
   chats: chatReducer.chats,
+  messages: messageReducer.messages,
 });
 
 const mapDispatchProps = (dispatch) =>

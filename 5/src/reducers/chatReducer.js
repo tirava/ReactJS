@@ -13,12 +13,14 @@ const initialStore = {
 export default function chatReducer(store = initialStore, action) {
   switch (action.type) {
     case SEND_MESSAGE: {
+      const id = action.chatId;
+      const chat = store.chats[id];
       return update(store, {
         chats: {
           $merge: {
-            [action.chatId]: {
-              title: store.chats[action.chatId].title,
-              messageList: [...store.chats[action.chatId].messageList,
+            [id]: {
+              title: chat.title,
+              messageList: [...chat.messageList,
                 action.messageId],
             },
           },
