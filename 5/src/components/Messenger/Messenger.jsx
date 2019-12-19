@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
 import {MessageList} from '../MessageList/MessageList';
 import {MessengerForm} from '../MessengerForm/MessengerForm';
 import './Messenger.sass';
 import {formatDate} from '../../utils/utils';
 import PropTypes from 'prop-types';
-import {addChat} from '../../actions/chatActions';
 
-class Messenger extends Component {
+export class Messenger extends Component {
   state = {
     chatId: '1',
   };
@@ -67,12 +64,3 @@ class Messenger extends Component {
     );
   }
 }
-
-const mapStateToProps = ({chatReducer}) => ({
-  chats: chatReducer.chats,
-});
-
-const mapDispatchProps = (dispatch) =>
-  bindActionCreators({addChat}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchProps)(Messenger);

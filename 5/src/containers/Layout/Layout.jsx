@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import Messenger from '../Messenger/Messenger';
-import {Header} from '../Header/Header';
+import {Messenger} from '../../components/Messenger/Messenger';
+import {Header} from '../../components/Header/Header';
 import ChatList from '../ChatList/ChatList';
 import PropTypes from 'prop-types';
 import {formatDate} from '../../utils/utils';
@@ -75,21 +75,27 @@ class Layout extends Component {
   //   });
   // };
 
-  sendMessage = (message, author) => {
-    const {chatId} = this.props;
+  sendMessage = (chatId, message) => {
     const {messages} = this.state;
+    const {author, content, date} = message;
     const messageId = Object.keys(messages).length + 1;
     this.setState({
       messages: {
         ...messages,
         [messageId]: {
-          author: message.author,
-          content: message.content,
-          date: message.date,
+          author: author,
+          content: content,
+          date: date,
         },
       },
     });
-    this.props.sendMessage(messageId, message.content, author, chatId);
+    this.props.sendMessage(
+      messageId,
+      author,
+      content,
+      date,
+      chatId,
+    );
   };
 
   // addNewChat = (title) => {

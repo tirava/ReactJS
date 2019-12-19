@@ -9,7 +9,7 @@ import SendIcon from '@material-ui/icons/Send';
 import {Link} from 'react-router-dom';
 import './ChatList.sass';
 import PropTypes from 'prop-types';
-import {ChatForm} from '../ChatForm/ChatForm';
+import {ChatForm} from '../../components/ChatForm/ChatForm';
 import {animateScroll} from 'react-scroll';
 import {addChat} from '../../actions/chatActions';
 
