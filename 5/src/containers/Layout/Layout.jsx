@@ -21,30 +21,6 @@ class Layout extends Component {
     sendMessage: PropTypes.func.isRequired,
   };
 
-  // sendMessage = (chatId, message) => {
-  //   this.setState((prevState) => {
-  //     const {chats, messages} = prevState;
-  //     const messageId = Object.keys(messages).length + 1;
-  //     return {
-  //       chats: {
-  //         ...chats,
-  //         [chatId]: {
-  //           ...chats[chatId],
-  //           messageList: [...chats[chatId]['messageList'], messageId],
-  //         },
-  //       },
-  //       messages: {
-  //         ...messages,
-  //         [messageId]: {
-  //           author: message.author,
-  //           content: message.content,
-  //           date: message.date,
-  //         },
-  //       },
-  //     };
-  //   });
-  // };
-
   sendMessage = (chatId, message) => {
     const {messages} = this.props;
     const {author, content, date} = message;
@@ -67,32 +43,6 @@ class Layout extends Component {
       chatId,
     );
   };
-
-  // addNewChat = (title) => {
-  //   this.setState((prevState) => {
-  //     const {chats, messages} = prevState;
-  //     for (const chat of Object.entries(chats)) {
-  //       if (chat[1].title === title || title === '') {
-  //         alert('Недопустимое имя чата!');
-  //         return null;
-  //       }
-  //     }
-  //     const chatId = Object.keys(chats).length + 1;
-  //     const messageId = Object.keys(messages).length + 1;
-  //     return {
-  // eslint-disable-next-line max-len
-  //       chats: {...chats, [chatId]: {title: title, messageList: [messageId]}},
-  //       messages: {
-  //         ...messages,
-  //         [messageId]: {
-  //           author: 'Клим',
-  //           content: `Привет! Вы в чатике \"${title}\"`,
-  //           date: formatDate(),
-  //         },
-  //       },
-  //     };
-  //   });
-  // };
 
   render() {
     const {chats, messages} = this.props;
