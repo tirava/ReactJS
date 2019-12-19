@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Messenger} from '../../components/Messenger/Messenger';
-import {Header} from '../../components/Header/Header';
+import Header from '../Header/Header';
 import ChatList from '../ChatList/ChatList';
 import PropTypes from 'prop-types';
 import {sendMessage} from '../../actions/messageActions';
@@ -57,7 +57,7 @@ class Layout extends Component {
 
     return (
       <div className='layout'>
-        <Header chatId={id} chatName={chats[id].title}/>
+        <Header chatId={id}/>
         <div className='chat-mess'>
           <ChatList chatId={id}/>
           <Messenger chatId={id} chatName={chats[id].title}
