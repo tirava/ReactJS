@@ -3,7 +3,7 @@ import {Messenger} from '../Messenger/Messenger';
 import {Header} from '../Header/Header';
 import {ChatList} from '../ChatList/ChatList';
 import PropTypes from 'prop-types';
-import {formatDate} from '../utils';
+import {formatDate} from '../../utils/utils';
 import './Layout.sass';
 
 export class Layout extends Component {

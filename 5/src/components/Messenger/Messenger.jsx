@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {MessageList} from '../MessageList/MessageList';
 import {MessengerForm} from '../MessengerForm/MessengerForm';
 import './Messenger.sass';
-import {formatDate} from '../utils';
+import {formatDate} from '../../utils/utils';
 import PropTypes from 'prop-types';
 
 export class Messenger extends Component {
