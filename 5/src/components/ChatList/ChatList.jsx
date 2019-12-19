@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
-// import {connect} from 'react-redux';
-import connect from 'react-redux/es/connect/connect';
+import {connect} from 'react-redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -17,7 +16,7 @@ import {addChat} from '../../actions/chatActions';
 class ChatList extends Component {
   static propTypes = {
     chats: PropTypes.object.isRequired,
-    // chatId: PropTypes.string,
+    chatId: PropTypes.string,
     addChat: PropTypes.func.isRequired,
   };
 
@@ -36,12 +35,11 @@ class ChatList extends Component {
   }
 
   renderRows = (chats) => {
-    // const {chatId} = this.props;
+    const {chatId} = this.props;
     const items = [];
     for (const [id, chat] of Object.entries(chats)) {
       const link = '/chat/' + id;
-      // const selected = (chatId === '' + id);
-      const selected = false;
+      const selected = (chatId === '' + id);
       items.push(
         <Link className='chat-link' to={link} key={id}>
           <ListItem button key={id} selected={selected}>

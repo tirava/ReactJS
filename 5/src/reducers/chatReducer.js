@@ -26,6 +26,12 @@ export default function chatReducer(store = initialStore, action) {
       });
     }
     case ADD_CHAT: {
+      for (const chat of Object.entries(store.chats)) {
+        if (chat[1].title === action.title || action.title === '') {
+          alert('Недопустимое имя чата!');
+          return store;
+        }
+      }
       const chatId = Object.keys(store.chats).length + 1;
       return update(store, {
         chats: {

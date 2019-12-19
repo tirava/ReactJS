@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
-// import {connect} from 'react-redux';
-import connect from 'react-redux/es/connect/connect';
+import {connect} from 'react-redux';
 import Messenger from '../Messenger/Messenger';
 import {Header} from '../Header/Header';
 import ChatList from '../ChatList/ChatList';
@@ -12,10 +11,6 @@ import './Layout.sass';
 
 class Layout extends Component {
   state = {
-    // chats: {
-    //   1: {title: 'Урок №1', messageList: [1, 2]},
-    //   2: {title: 'Урок №2', messageList: [3, 4]},
-    // },
     messages: {
       1: {
         author: 'Клим',
@@ -139,9 +134,7 @@ class Layout extends Component {
       <div className='layout'>
         <Header chatId={id} chatName={chats[id].title}/>
         <div className='chat-mess'>
-          {/* <ChatList chatId={id} chats={chats}*/}
-          {/*          addNewChat={this.addNewChat}/>*/}
-          <ChatList/>
+          <ChatList chatId={id}/>
           <Messenger chatId={id} chatName={chats[id].title}
                      messages={chatMessages}
                      addNewMessage={this.sendMessage}/>
@@ -154,12 +147,6 @@ class Layout extends Component {
 const mapStateToProps = ({chatReducer}) => ({
   chats: chatReducer.chats,
 });
-// const mapStateToProps = (state, ownProps) => {
-// const {id} = ownProps.match.params;
-//   chats: state.chats;
-// messages: state.messages.chats[id].messages;
-// id: id
-// };
 
 const mapDispatchProps = (dispatch) =>
   bindActionCreators({sendMessage}, dispatch);

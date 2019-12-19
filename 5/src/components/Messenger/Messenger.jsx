@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
-// import {connect} from 'react-redux';
-import connect from 'react-redux/es/connect/connect';
+import {connect} from 'react-redux';
 import {MessageList} from '../MessageList/MessageList';
 import {MessengerForm} from '../MessengerForm/MessengerForm';
 import './Messenger.sass';
