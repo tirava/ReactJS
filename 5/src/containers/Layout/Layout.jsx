@@ -48,7 +48,9 @@ class Layout extends Component {
   render() {
     const {chats, messages, profiles, addChat, addProfile} = this.props;
 
-    if (Object.keys(chats).length === 0 || Object.keys(messages).length === 0 || Object.keys(profiles).length === 0) {
+    if (Object.keys(chats).length === 0 ||
+      Object.keys(messages).length === 0 ||
+      Object.keys(profiles).length === 0) {
       return null;
     }
 
