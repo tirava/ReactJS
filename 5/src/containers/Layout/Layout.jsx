@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import './Layout.sass';
 import {loadMessages, sendMessage} from '../../actions/messageActions';
 import {loadChats, addChat} from '../../actions/chatActions';
-import {addProfile} from '../../actions/profileActions';
+import {loadProfiles, addProfile} from '../../actions/profileActions';
 
 class Layout extends Component {
   static propTypes = {
@@ -26,11 +26,13 @@ class Layout extends Component {
     addProfile: PropTypes.func.isRequired,
     loadChats: PropTypes.func.isRequired,
     loadMessages: PropTypes.func.isRequired,
+    loadProfiles: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
     this.props.loadChats();
     this.props.loadMessages();
+    this.props.loadProfiles();
   }
 
   sendMessage = (chatId, message) => {
@@ -46,7 +48,7 @@ class Layout extends Component {
   render() {
     const {chats, messages, profiles, addChat, addProfile} = this.props;
 
-    if (Object.keys(chats).length === 0 || Object.keys(messages).length === 0) {
+    if (Object.keys(chats).length === 0 || Object.keys(messages).length === 0 || Object.keys(profiles).length === 0) {
       return null;
     }
 
@@ -84,7 +86,7 @@ const mapStateToProps = ({chatReducer, messageReducer, profileReducer}) => ({
 
 const mapDispatchProps = (dispatch) =>
   bindActionCreators({
-    loadChats, loadMessages,
+    loadChats, loadMessages, loadProfiles,
     sendMessage, addChat, addProfile,
   }, dispatch);
 
