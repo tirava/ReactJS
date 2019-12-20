@@ -6,7 +6,7 @@ import {Header} from '../../components/Header/Header';
 import {ChatList} from '../../components/ChatList/ChatList';
 import PropTypes from 'prop-types';
 import './Layout.sass';
-import {sendMessage} from '../../actions/messageActions';
+import {loadMessages, sendMessage} from '../../actions/messageActions';
 import {loadChats, addChat} from '../../actions/chatActions';
 import {addProfile} from '../../actions/profileActions';
 
@@ -25,39 +25,28 @@ class Layout extends Component {
     addChat: PropTypes.func.isRequired,
     addProfile: PropTypes.func.isRequired,
     loadChats: PropTypes.func.isRequired,
+    loadMessages: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
     this.props.loadChats();
+    this.props.loadMessages();
   }
 
   sendMessage = (chatId, message) => {
     const {messages} = this.props;
-    const {author, content, date} = message;
     const messageId = Object.keys(messages).length + 1;
-    this.setState({
-      messages: {
-        ...messages,
-        [messageId]: {
-          author: author,
-          content: content,
-          date: date,
-        },
-      },
-    });
     this.props.sendMessage(
-      messageId,
-      author,
-      content,
-      date,
       chatId,
+      messageId,
+      message,
     );
   };
 
   render() {
     const {chats, messages, profiles, addChat, addProfile} = this.props;
 
-    if (Object.keys(chats).length === 0) {
+    if (Object.keys(chats).length === 0 || Object.keys(messages).length === 0) {
       return null;
     }
 
@@ -94,7 +83,9 @@ const mapStateToProps = ({chatReducer, messageReducer, profileReducer}) => ({
 });
 
 const mapDispatchProps = (dispatch) =>
-  bindActionCreators({loadChats, sendMessage, addChat, addProfile},
-    dispatch);
+  bindActionCreators({
+    loadChats, loadMessages,
+    sendMessage, addChat, addProfile,
+  }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchProps)(Layout);
