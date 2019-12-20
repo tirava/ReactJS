@@ -5,9 +5,9 @@ import {Messenger} from '../../components/Messenger/Messenger';
 import {Header} from '../../components/Header/Header';
 import {ChatList} from '../../components/ChatList/ChatList';
 import PropTypes from 'prop-types';
-import {sendMessage} from '../../actions/messageActions';
 import './Layout.sass';
-import {addChat} from '../../actions/chatActions';
+import {sendMessage} from '../../actions/messageActions';
+import {loadChats, addChat} from '../../actions/chatActions';
 import {addProfile} from '../../actions/profileActions';
 
 class Layout extends Component {
@@ -24,7 +24,12 @@ class Layout extends Component {
     sendMessage: PropTypes.func.isRequired,
     addChat: PropTypes.func.isRequired,
     addProfile: PropTypes.func.isRequired,
+    loadChats: PropTypes.func.isRequired,
   };
+
+  componentDidMount() {
+    this.props.loadChats();
+  }
 
   sendMessage = (chatId, message) => {
     const {messages} = this.props;
@@ -51,6 +56,11 @@ class Layout extends Component {
 
   render() {
     const {chats, messages, profiles, addChat, addProfile} = this.props;
+
+    if (Object.keys(chats).length === 0) {
+      return null;
+    }
+
     let {id} = this.props.match.params;
     if (id === undefined || id > Object.keys(chats).length) {
       id = '1';
@@ -69,7 +79,8 @@ class Layout extends Component {
           />
           <Messenger chatId={id} chatName={chats[id].title}
                      messages={chatMessages}
-                     addNewMessage={this.sendMessage}/>
+                     addNewMessage={this.sendMessage}
+          />
         </div>
       </div>
     );
@@ -83,7 +94,7 @@ const mapStateToProps = ({chatReducer, messageReducer, profileReducer}) => ({
 });
 
 const mapDispatchProps = (dispatch) =>
-  bindActionCreators({sendMessage, addChat, addProfile},
+  bindActionCreators({loadChats, sendMessage, addChat, addProfile},
     dispatch);
 
 export default connect(mapStateToProps, mapDispatchProps)(Layout);
