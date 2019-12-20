@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -11,10 +9,8 @@ import './ChatList.sass';
 import PropTypes from 'prop-types';
 import {ChatForm} from '../../components/ChatForm/ChatForm';
 import {animateScroll} from 'react-scroll';
-import {addChat} from '../../actions/chatActions';
-import {addProfile} from '../../actions/profileActions';
 
-class ChatList extends Component {
+export class ChatList extends Component {
   static propTypes = {
     chats: PropTypes.object.isRequired,
     chatId: PropTypes.string,
@@ -69,12 +65,3 @@ class ChatList extends Component {
     );
   }
 }
-
-const mapStateToProps = ({chatReducer}) => ({
-  chats: chatReducer.chats,
-});
-
-const mapDispatchProps = (dispatch) =>
-  bindActionCreators({addChat, addProfile}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchProps)(ChatList);

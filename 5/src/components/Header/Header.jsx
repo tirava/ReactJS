@@ -2,11 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './Header.sass';
 import {Link} from 'react-router-dom';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {addProfile} from '../../actions/profileActions';
 
-class Header extends Component {
+export class Header extends Component {
   static propTypes = {
     chatName: PropTypes.string,
     chatId: PropTypes.string,
@@ -28,12 +25,3 @@ class Header extends Component {
     );
   }
 }
-
-const mapStateToProps = ({profileReducer}) => ({
-  profiles: profileReducer.profiles,
-});
-
-const mapDispatchProps = (dispatch) =>
-  bindActionCreators({addProfile}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchProps)(Header);
