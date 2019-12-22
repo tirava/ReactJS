@@ -45,6 +45,7 @@ class Layout extends Component {
 
     // this block need for bypass first render when items loading from DB
     // because: render (no chats and others) -> reducer (load) -> render
+    // may be didmount is wrong
     if (Object.keys(chats).length === 0 ||
       Object.keys(messages).length === 0 ||
       Object.keys(profiles).length === 0) {

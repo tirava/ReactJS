@@ -1,16 +1,14 @@
 import React, {Component} from 'react';
 import {MessageList} from '../MessageList/MessageList';
 import {MessengerForm} from '../MessengerForm/MessengerForm';
-import {formatDate} from '../../utils/utils';
 import PropTypes from 'prop-types';
-import {botName} from '../../utils/constants';
 import './Messenger.sass';
 
 export class Messenger extends Component {
-  state = {
-    chatId: '1',
-    lenMessages: 0,
-  };
+  // state = {
+  //   chatId: '1',
+  //   lenMessages: 0,
+  // };
 
   static propTypes = {
     messages: PropTypes.array.isRequired,
@@ -19,45 +17,45 @@ export class Messenger extends Component {
     chatName: PropTypes.string,
   };
 
-  botTimers = [];
+  // botTimers = [];
 
-  clearBots = () => {
-    this.botTimers.forEach((timer) => clearTimeout(timer));
-    this.botTimers = [];
-  };
+  // clearBots = () => {
+  //   this.botTimers.forEach((timer) => clearTimeout(timer));
+  //   this.botTimers = [];
+  // };
 
   sendNewMessage = (message) => {
-    this.clearBots();
+    // this.clearBots();
     this.props.addNewMessage(this.props.chatId, message);
   };
 
-  componentDidUpdate() {
-    const {chatId, chatName, messages} = this.props;
-    const len = messages.length;
-    if (len === 0 || len === this.state.lenMessages) {
-      return;
-    }
-
-    if (this.state.chatId !== chatId) {
-      this.clearBots();
-    }
-    this.setState((prevState) => {
-      prevState.chatId = chatId;
-      prevState.lenMessages = len;
-    });
-
-    const name = messages[len - 1].author;
-    if (name !== botName) {
-      this.botTimers.push(
-        setTimeout(() =>
-          this.sendNewMessage({
-            author: botName,
-            content: `${name}, не понял, здесь чат "${chatName}"`,
-            date: formatDate(),
-          }), 1000),
-      );
-    }
-  }
+  // componentDidUpdate() {
+  //   const {chatId, chatName, messages} = this.props;
+  //   const len = messages.length;
+  //   if (len === 0 || len === this.state.lenMessages) {
+  //     return;
+  //   }
+  //
+  //   if (this.state.chatId !== chatId) {
+  //     this.clearBots();
+  //   }
+  //   this.setState((prevState) => {
+  //     prevState.chatId = chatId;
+  //     prevState.lenMessages = len;
+  //   });
+  //
+  //   const name = messages[len - 1].author;
+  //   if (name !== botName) {
+  //     this.botTimers.push(
+  //       setTimeout(() =>
+  //         this.sendNewMessage({
+  //           author: botName,
+  //           content: `${name}, не понял, здесь чат "${chatName}"`,
+  //           date: formatDate(),
+  //         }), 1000),
+  //     );
+  //   }
+  // }
 
   render() {
     const {messages} = this.props;
