@@ -1,6 +1,7 @@
 import update from 'react-addons-update';
 import {LOAD_MESSAGES, SEND_MESSAGE} from '../actions/messageActions';
 import {formatDate} from '../utils/utils';
+import {botName} from '../utils/constants';
 
 const initialStore = {
   messages: {},
@@ -12,27 +13,27 @@ export default function messageReducer(store = initialStore, action) {
       return {
         messages: {
           1: {
-            author: 'Клим',
+            author: botName,
             content: 'Привет!',
             date: formatDate(),
           },
           2: {
-            author: 'Клим',
+            author: botName,
             content: 'Вы в чатике \"Урок №1\"',
             date: formatDate(),
           },
           3: {
-            author: 'Клим',
+            author: botName,
             content: 'Привет!',
             date: formatDate(),
           },
           4: {
-            author: 'Клим',
+            author: botName,
             content: 'Вы в чатике \"Урок №2\"',
             date: formatDate(),
           },
           5: {
-            author: 'Клим',
+            author: botName,
             content: 'Приветик! Вы в чатике \"Урок №3\"',
             date: formatDate(),
           },

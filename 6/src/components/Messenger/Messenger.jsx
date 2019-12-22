@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {MessageList} from '../MessageList/MessageList';
 import {MessengerForm} from '../MessengerForm/MessengerForm';
-import './Messenger.sass';
 import {formatDate} from '../../utils/utils';
 import PropTypes from 'prop-types';
+import {botName} from '../../utils/constants';
+import './Messenger.sass';
 
 export class Messenger extends Component {
   state = {
@@ -20,11 +21,14 @@ export class Messenger extends Component {
 
   botTimers = [];
 
-  sendNewMessage = (message) => {
+  clearBots = () => {
     this.botTimers.forEach((timer) => clearTimeout(timer));
     this.botTimers = [];
-    const {chatId} = this.props;
-    this.props.addNewMessage(chatId, message);
+  };
+
+  sendNewMessage = (message) => {
+    this.clearBots();
+    this.props.addNewMessage(this.props.chatId, message);
   };
 
   componentDidUpdate() {
@@ -35,8 +39,7 @@ export class Messenger extends Component {
     }
 
     if (this.state.chatId !== chatId) {
-      this.botTimers.forEach((timer) => clearTimeout(timer));
-      this.botTimers = [];
+      this.clearBots();
     }
     this.setState((prevState) => {
       prevState.chatId = chatId;
@@ -44,11 +47,11 @@ export class Messenger extends Component {
     });
 
     const name = messages[len - 1].author;
-    if (name !== 'Клим') {
+    if (name !== botName) {
       this.botTimers.push(
         setTimeout(() =>
           this.sendNewMessage({
-            author: 'Клим',
+            author: botName,
             content: `${name}, не понял, здесь чат "${chatName}"`,
             date: formatDate(),
           }), 1000),

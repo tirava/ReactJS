@@ -12,11 +12,6 @@ import {loadProfiles, addProfile} from '../../actions/profileActions';
 
 class Layout extends Component {
   static propTypes = {
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        id: PropTypes.string,
-      }),
-    }),
     chatId: PropTypes.string,
     chats: PropTypes.object.isRequired,
     messages: PropTypes.object.isRequired,
@@ -48,12 +43,15 @@ class Layout extends Component {
   render() {
     const {chats, messages, profiles, addChat, addProfile} = this.props;
 
+    // this block need for bypass first render when items loading from DB
+    // because: render (no chats and others) -> reducer (load) -> render
     if (Object.keys(chats).length === 0 ||
       Object.keys(messages).length === 0 ||
       Object.keys(profiles).length === 0) {
       return null;
     }
 
+    // eslint-disable-next-line react/prop-types
     let {id} = this.props.match.params;
     if (id === undefined || id > Object.keys(chats).length) {
       id = '1';

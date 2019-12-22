@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {botName} from '../../utils/constants';
 import './Message.sass';
 
 export const messageType = {
@@ -14,7 +15,7 @@ export class Message extends Component {
   render() {
     const {author, content, date} = this.props;
     return (
-      <div className={author === 'Клим' ? 'bot-item' : 'user-item'}>
+      <div className={author === botName ? 'bot-item' : 'user-item'}>
         <span className='user-name'>{author || 'Anonymous'}</span>
         <span className='user-date'>{date}</span>
         <span className='user-content'>{content}</span>
