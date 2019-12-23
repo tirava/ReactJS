@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {push} from 'connected-react-router';
 import {connect} from 'react-redux';
+import './ChatLink.sass';
 
 class ChatLink extends Component {
   static propTypes = {
@@ -25,7 +26,7 @@ class ChatLink extends Component {
                 onClick={() => this.props.push(link)}
       >
         <ListItemIcon><SendIcon/></ListItemIcon>
-        <ListItemText primary={title}/>
+        <ListItemText primary={title} className='chat-link'/>
       </ListItem>
     );
   }

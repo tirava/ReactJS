@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import List from '@material-ui/core/List';
 import PropTypes from 'prop-types';
 import {ChatForm} from '../../components/ChatForm/ChatForm';
-import ChatLink from '../../components/ChatLink/ChatLink';
+import ChatLink from '../../containers/ChatLink/ChatLink';
 import {animateScroll} from 'react-scroll';
 import './ChatList.sass';
 
