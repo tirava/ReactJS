@@ -51,14 +51,12 @@ export default function messageReducer(store = initialStore, action) {
       });
     }
     case DELETE_MESSAGE: {
-      // return update(store, {
-      //   messages: {
-      //     $splice: {
-      //       [action.messageId]: {},
-      //     },
-      //   },
-      // });
-      return store.messages.filter((messageId) => messageId !== action.messageId);
+      delete store.messages[action.messageId];
+      return update(store, {
+        messages: {
+          $merge: {},
+        },
+      });
     }
     default:
       return store;

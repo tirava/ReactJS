@@ -12,6 +12,7 @@ const messageType = {
   content: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  chatId: PropTypes.string.isRequired,
   deleteMessage: PropTypes.func.isRequired,
 };
 
@@ -20,7 +21,7 @@ class Message extends Component {
 
   handleDeleteMessage = () => {
     confirm('Действительно удалить сообщение?') ?
-      this.props.deleteMessage(this.props.id) : null;
+      this.props.deleteMessage(this.props.chatId, this.props.id) : null;
   };
 
   render() {

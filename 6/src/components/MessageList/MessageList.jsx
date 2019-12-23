@@ -40,7 +40,7 @@ export class MessageList extends Component {
     return (
       <div className='message-list' id='message-list'>
         {chatMessages.map((item, index) =>
-          <Message {...item} key={index}/>,
+          <Message {...item} key={index} chatId={chatId}/>,
         )}
       </div>
     );
