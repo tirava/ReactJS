@@ -1,5 +1,6 @@
 import update from 'react-addons-update';
 import {ADD_PROFILE} from '../actions/profileActions';
+import {DELETE_CHAT} from '../actions/chatActions';
 
 const initialStore = {
   profiles: {
@@ -21,6 +22,17 @@ export default function profileReducer(store = initialStore, action) {
               description: action.description,
             },
           },
+        },
+      });
+    }
+    case DELETE_CHAT: {
+      if (Object.keys(store.profiles).length === 1) {
+        return store;
+      }
+      delete store.profiles[action.chatId];
+      return update(store, {
+        profiles: {
+          $merge: {},
         },
       });
     }

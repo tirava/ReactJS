@@ -1,5 +1,5 @@
 import update from 'react-addons-update';
-import {ADD_CHAT} from '../actions/chatActions';
+import {ADD_CHAT, DELETE_CHAT} from '../actions/chatActions';
 import {SEND_MESSAGE, DELETE_MESSAGE} from '../actions/messageActions';
 
 const initialStore = {
@@ -34,7 +34,7 @@ export default function chatReducer(store = initialStore, action) {
           return store;
         }
       }
-      const chatId = Object.keys(store.chats).length + 1;
+      const chatId = parseInt(Object.keys(store.chats).pop()) + 1;
       return update(store, {
         chats: {
           $merge: {
@@ -58,6 +58,22 @@ export default function chatReducer(store = initialStore, action) {
               messageList: newList,
             },
           },
+        },
+      });
+    }
+    case DELETE_CHAT: {
+      if (Object.keys(store.chats).length === 1) {
+        alert('Нельзя удалить последний чат!');
+        return store;
+      }
+      const {chatId} = action;
+      // store.chats[chatId].messageList.forEach((messageId) =>
+      //   deleteMessage(chatId, messageId),
+      // );
+      delete store.chats[chatId];
+      return update(store, {
+        chats: {
+          $merge: {},
         },
       });
     }
