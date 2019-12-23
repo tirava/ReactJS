@@ -50,6 +50,7 @@
     "react-addons-update": "latest",
     "react-redux": "latest",
     "connected-react-router": "latest",
-    "history": "latest"
+    "history": "latest",
+    "redux-persist": "latest"
   }
 }
