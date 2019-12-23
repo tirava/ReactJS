@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
 import List from '@material-ui/core/List';
-// import ListItem from '@material-ui/core/ListItem';
-// import ListItemText from '@material-ui/core/ListItemText';
-// import ListItemIcon from '@material-ui/core/ListItemIcon';
-// import SendIcon from '@material-ui/icons/Send';
-// import {Link} from 'react-router-dom';
-import './ChatList.sass';
 import PropTypes from 'prop-types';
 import {ChatForm} from '../../components/ChatForm/ChatForm';
-import {ChatLink} from '../../components/ChatLink/ChatLink';
+import ChatLink from '../../components/ChatLink/ChatLink';
 import {animateScroll} from 'react-scroll';
+import './ChatList.sass';
 
 export class ChatList extends Component {
   static propTypes = {
