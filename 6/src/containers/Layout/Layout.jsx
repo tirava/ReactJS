@@ -23,7 +23,8 @@ class Layout extends Component {
 
   sendMessage = (chatId, message) => {
     const {messages} = this.props;
-    const messageId = Object.keys(messages).length + 1;
+    const lastMessageId = Object.keys(messages).pop();
+    const messageId = parseInt(lastMessageId) + 1;
     this.props.sendMessage(
       chatId,
       messageId,

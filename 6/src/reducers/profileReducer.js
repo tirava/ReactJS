@@ -12,7 +12,7 @@ const initialStore = {
 export default function profileReducer(store = initialStore, action) {
   switch (action.type) {
     case ADD_PROFILE: {
-      const profileId = Object.keys(store.profiles).length + 1;
+      const profileId = parseInt(Object.keys(store.profiles).pop()) + 1;
       return update(store, {
         profiles: {
           $merge: {

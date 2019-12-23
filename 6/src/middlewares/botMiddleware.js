@@ -17,8 +17,8 @@ export default (store) => (next) => (action) => {
       clearBots();
       botTimers.push(setTimeout(() => store.dispatch(
         sendMessage(
-          action.chatId, Object.keys(
-          store.getState().messageReducer.messages).length + 1,
+          action.chatId, parseInt(Object.keys(
+          store.getState().messageReducer.messages).pop()) + 1,
           {
             author: botName,
             content: `${author}, не понял, здесь чат "${chatName}"`,
