@@ -3,20 +3,24 @@ import PropTypes from 'prop-types';
 import {botName} from '../../utils/constants';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import './Message.sass';
+import {bindActionCreators} from 'redux';
+import {deleteMessage} from '../../actions/messageActions';
+import {connect} from 'react-redux';
 
 const messageType = {
   author: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  deleteMessage: PropTypes.func.isRequired,
 };
 
-export class Message extends Component {
+class Message extends Component {
   static propTypes = messageType;
 
   handleDeleteMessage = () => {
     confirm('Действительно удалить сообщение?') ?
-      console.log(this.props.id) : null;
+      this.props.deleteMessage(this.props.id) : null;
   };
 
   render() {
@@ -35,3 +39,12 @@ export class Message extends Component {
     );
   }
 }
+
+const mapStateToProps = ({messageReducer}) => ({
+  messages: messageReducer.messages,
+});
+
+const mapDispatchProps = (dispatch) =>
+  bindActionCreators({deleteMessage}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchProps)(Message);

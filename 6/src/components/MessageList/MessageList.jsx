@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Message} from '../Message/Message';
+import Message from '../Message/Message';
 import PropTypes from 'prop-types';
 import {animateScroll} from 'react-scroll';
 import './MessageList.sass';

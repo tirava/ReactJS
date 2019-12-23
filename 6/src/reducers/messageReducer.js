@@ -1,5 +1,6 @@
 import update from 'react-addons-update';
 import {SEND_MESSAGE} from '../actions/messageActions';
+import {DELETE_MESSAGE} from '../actions/messageActions';
 import {formatDate} from '../utils/utils';
 import {botName} from '../utils/constants';
 
@@ -48,6 +49,16 @@ export default function messageReducer(store = initialStore, action) {
           },
         },
       });
+    }
+    case DELETE_MESSAGE: {
+      // return update(store, {
+      //   messages: {
+      //     $splice: {
+      //       [action.messageId]: {},
+      //     },
+      //   },
+      // });
+      return store.messages.filter((messageId) => messageId !== action.messageId);
     }
     default:
       return store;
