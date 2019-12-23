@@ -6,7 +6,8 @@ import './Messenger.sass';
 
 export class Messenger extends Component {
   static propTypes = {
-    messages: PropTypes.array.isRequired,
+    messages: PropTypes.object.isRequired,
+    chats: PropTypes.object.isRequired,
     addNewMessage: PropTypes.func.isRequired,
     chatId: PropTypes.string,
     chatName: PropTypes.string,
@@ -17,10 +18,10 @@ export class Messenger extends Component {
   };
 
   render() {
-    const {messages} = this.props;
+    const {messages, chatId, chats} = this.props;
     return (
       <div className='messenger'>
-        <MessageList messages={messages}/>
+        <MessageList messages={messages} chatId={chatId} chats={chats}/>
         <MessengerForm onSendMessage={this.sendNewMessage}/>
       </div>
     );

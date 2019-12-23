@@ -40,10 +40,6 @@ class Layout extends Component {
       id = '1';
     }
 
-    const chatMessages = chats[id].messageList.map((messageId) => (
-      messages[messageId]
-    ));
-
     return (
       <div className='layout'>
         <Header chatId={id} profiles={profiles}/>
@@ -52,7 +48,7 @@ class Layout extends Component {
                     addChat={addChat} addProfile={addProfile}
           />
           <Messenger chatId={id} chatName={chats[id].title}
-                     messages={chatMessages}
+                     messages={messages} chats={chats}
                      addNewMessage={this.sendMessage}
           />
         </div>
