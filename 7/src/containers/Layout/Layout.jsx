@@ -6,9 +6,10 @@ import {Header} from '../../components/Header/Header';
 import {ChatList} from '../../components/ChatList/ChatList';
 import PropTypes from 'prop-types';
 import './Layout.sass';
-import {sendMessage} from '../../actions/messageActions';
+import {sendMessage, loadMessages} from '../../actions/messageActions';
 import {addChat} from '../../actions/chatActions';
 import {addProfile} from '../../actions/profileActions';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Layout extends Component {
   static propTypes = {
@@ -17,9 +18,15 @@ class Layout extends Component {
     messages: PropTypes.object.isRequired,
     profiles: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,
+    loadMessages: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     addChat: PropTypes.func.isRequired,
     addProfile: PropTypes.func.isRequired,
   };
+
+  componentDidMount() {
+    this.props.loadMessages();
+  }
 
   sendMessage = (chatId, message) => {
     const {messages} = this.props;
@@ -35,6 +42,35 @@ class Layout extends Component {
   render() {
     const {chats, messages, profiles, addChat, addProfile} = this.props;
 
+    if (this.props.isLoading) {
+      return <CircularProgress/>;
+    }
+
+    if (Object.keys(messages).length === 0) {
+      return (
+        <div>
+          Нет ни одного сообщения!
+        </div>
+      );
+    }
+
+    // if (Object.keys(profiles).length === 0) {
+    //   alert('Нет ни одного профиля!');
+    // }
+    //
+    // if (Object.keys(messages).length === 0) {
+    //   fetch('/api/messages.json').then((body) =>
+    //     body.json()).then((json) => {
+    //     json.forEach((msg) => {
+    //       this.props.sendMessage(msg.chatId, msg.id, {
+    //         author: msg.author,
+    //         content: msg.content,
+    //         date: msg.date,
+    //       });
+    //     });
+    //   });
+    // }
+
     // eslint-disable-next-line react/prop-types
     let {id} = this.props.match.params;
     if (chats[id] === null || chats[id] === undefined) {
@@ -45,9 +81,10 @@ class Layout extends Component {
         }
       }
     }
+
     return (
       <div className='layout'>
-        <Header chatId={id} profiles={profiles}/>
+        {/*<Header chatId={id} profiles={profiles}/>*/}
         <div className='chat-mess'>
           <ChatList chatId={id} chats={chats}
                     addChat={addChat} addProfile={addProfile}
@@ -66,11 +103,12 @@ const mapStateToProps = ({chatReducer, messageReducer, profileReducer}) => ({
   chats: chatReducer.chats,
   messages: messageReducer.messages,
   profiles: profileReducer.profiles,
+  isLoading: messageReducer.isLoading,
 });
 
 const mapDispatchProps = (dispatch) =>
   bindActionCreators({
-    sendMessage, addChat, addProfile,
+    sendMessage, loadMessages, addChat, addProfile,
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchProps)(Layout);

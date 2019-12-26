@@ -5,9 +5,9 @@ import {getNullCountObject} from '../utils/utils';
 
 const initialStore = {
   profiles: {
-    1: {title: 'Урок №1', description: 'Введение в JavaScript'},
-    2: {title: 'Урок №2', description: 'Погружение в React'},
-    3: {title: 'Урок №3', description: 'Изучаем Redux'},
+    // 1: {title: 'Урок №1', description: 'Введение в JavaScript'},
+    // 2: {title: 'Урок №2', description: 'Погружение в React'},
+    // 3: {title: 'Урок №3', description: 'Изучаем Redux'},
   },
 };
 
