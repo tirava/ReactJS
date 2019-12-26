@@ -6,7 +6,7 @@ import {Header} from '../../components/Header/Header';
 import {ChatList} from '../../components/ChatList/ChatList';
 import PropTypes from 'prop-types';
 import './Layout.sass';
-import {sendMessage, loadMessages} from '../../actions/messageActions';
+import {sendMessage} from '../../actions/messageActions';
 import {addChat, loadChats} from '../../actions/chatActions';
 import {addProfile, loadProfiles} from '../../actions/profileActions';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -18,10 +18,8 @@ class Layout extends Component {
     messages: PropTypes.object.isRequired,
     profiles: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,
-    loadMessages: PropTypes.func.isRequired,
     loadProfiles: PropTypes.func.isRequired,
     loadChats: PropTypes.func.isRequired,
-    isLoadingMessages: PropTypes.bool.isRequired,
     isLoadingProfiles: PropTypes.bool.isRequired,
     isLoadingChats: PropTypes.bool.isRequired,
     addChat: PropTypes.func.isRequired,
@@ -30,7 +28,6 @@ class Layout extends Component {
 
   componentDidMount() {
     this.props.loadChats();
-    this.props.loadMessages();
     this.props.loadProfiles();
   }
 
@@ -48,7 +45,7 @@ class Layout extends Component {
   render() {
     const {chats, messages, profiles, addChat, addProfile} = this.props;
 
-    if (this.props.isLoadingMessages || this.props.isLoadingProfiles) {
+    if (this.props.isLoadingChats || this.props.isLoadingProfiles) {
       return <CircularProgress/>;
     }
 
@@ -56,13 +53,6 @@ class Layout extends Component {
       return (
         <div>
           Нет ни одного чата!
-        </div>
-      );
-    }
-    if (Object.keys(messages).length === 0) {
-      return (
-        <div>
-          Нет ни одного сообщения!
         </div>
       );
     }
@@ -106,14 +96,13 @@ const mapStateToProps = ({chatReducer, messageReducer, profileReducer}) => ({
   chats: chatReducer.chats,
   messages: messageReducer.messages,
   profiles: profileReducer.profiles,
-  isLoadingMessages: messageReducer.isLoadingMessages,
   isLoadingProfiles: profileReducer.isLoadingProfiles,
   isLoadingChats: chatReducer.isLoadingChats,
 });
 
 const mapDispatchProps = (dispatch) =>
   bindActionCreators({
-    sendMessage, loadMessages, addChat, addProfile, loadProfiles, loadChats,
+    sendMessage, addChat, addProfile, loadProfiles, loadChats,
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchProps)(Layout);

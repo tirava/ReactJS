@@ -1,4 +1,6 @@
 import {getJSON, RSAA} from 'redux-api-middleware';
+import {normalize} from 'normalizr';
+import {chats} from '../utils/schemas';
 
 export const ADD_CHAT = '@@chat/ADD_CHAT';
 export const DELETE_CHAT = '@@chat/DELETE_CHAT';
@@ -26,7 +28,7 @@ export const loadChats = () => ({
       {
         type: SUCCESS_CHATS_LOADING,
         payload: (action, state, res) => getJSON(res).then(
-          (json) => json,
+          (json) => normalize(json, [chats]),
         ),
       },
       ERROR_CHATS_LOADING,

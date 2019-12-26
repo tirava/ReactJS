@@ -51,8 +51,8 @@ export default function profileReducer(store = initialStore, action) {
     case SUCCESS_PROFILES_LOADING: {
       const profiles = {};
       action.payload.forEach((msg) => {
-        const {chatId, title, description} = msg;
-        profiles[chatId] = {title, description};
+        const {id, title, description} = msg;
+        profiles[id] = {title, description};
       });
       return update(store, {
         profiles: {

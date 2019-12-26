@@ -1,26 +1,26 @@
 [
   {
-    "chatId": 1,
+    "id": 1,
     "title": "Урок №1",
     "description": "Введение в JavaScript"
   },
   {
-    "chatId": 2,
+    "id": 2,
     "title": "Урок №2",
     "description": "Погружение в React"
   },
   {
-    "chatId": 3,
+    "id": 3,
     "title": "Урок №3",
     "description": "Изучаем Redux"
   },
   {
-    "chatId": 4,
+    "id": 4,
     "title": "API-4",
     "description": "Test API 4"
   },
   {
-    "chatId": 5,
+    "id": 5,
     "title": "API-5",
     "description": "Test API 5"
   }

@@ -3,15 +3,13 @@ import {getNullCountObject} from '../utils/utils';
 import {
   ADD_CHAT,
   DELETE_CHAT,
-  START_CHATS_LOADING,
   SUCCESS_CHATS_LOADING,
-  ERROR_CHATS_LOADING,
 } from '../actions/chatActions';
 import {SEND_MESSAGE, DELETE_MESSAGE} from '../actions/messageActions';
 
 const initialStore = {
   chats: {},
-  isLoadingChats: false,
+  isLoadingChats: true,
 };
 
 export default function chatReducer(store = initialStore, action) {
@@ -82,33 +80,11 @@ export default function chatReducer(store = initialStore, action) {
         },
       });
     }
-    case START_CHATS_LOADING: {
-      return update(store, {
-        isLoadingChats: {
-          $set: true,
-        },
-      });
-    }
     case SUCCESS_CHATS_LOADING: {
-      const chats = {};
-      action.payload.forEach((msg) => {
-        const chat = {title: '', messageList: []};
-        const {chatId, title, messages} = msg;
-        chat.title = title;
-        chat.messageList.push(...messages);
-        chats[chatId] = chat;
-      });
       return update(store, {
         chats: {
-          $set: chats,
+          $set: action.payload.entities.chats,
         },
-        isLoadingMessages: {
-          $set: false,
-        },
-      });
-    }
-    case ERROR_CHATS_LOADING: {
-      return update(store, {
         isLoadingChats: {
           $set: false,
         },

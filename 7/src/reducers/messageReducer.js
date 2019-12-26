@@ -1,15 +1,13 @@
 import update from 'react-addons-update';
+import {SEND_MESSAGE, DELETE_MESSAGE} from '../actions/messageActions';
 import {
-  SEND_MESSAGE,
-  DELETE_MESSAGE,
-  START_MESSAGES_LOADING,
-  SUCCESS_MESSAGES_LOADING,
-  ERROR_MESSAGES_LOADING,
-} from '../actions/messageActions';
+  START_CHATS_LOADING,
+  SUCCESS_CHATS_LOADING,
+  ERROR_CHATS_LOADING,
+} from '../actions/chatActions';
 
 const initialStore = {
   messages: {},
-  isLoadingMessages: false,
 };
 
 export default function messageReducer(store = initialStore, action) {
@@ -37,31 +35,23 @@ export default function messageReducer(store = initialStore, action) {
         },
       });
     }
-    case START_MESSAGES_LOADING: {
+    case START_CHATS_LOADING: {
       return update(store, {
-        isLoadingMessages: {
+        isLoadingChats: {
           $set: true,
         },
       });
     }
-    case SUCCESS_MESSAGES_LOADING: {
-      const messages = {};
-      action.payload.forEach((msg) => {
-        const {id, author, content, date} = msg;
-        messages[id] = {author, content, date};
-      });
+    case SUCCESS_CHATS_LOADING: {
       return update(store, {
         messages: {
-          $set: messages,
-        },
-        isLoadingMessages: {
-          $set: false,
+          $set: action.payload.entities.messages,
         },
       });
     }
-    case ERROR_MESSAGES_LOADING: {
+    case ERROR_CHATS_LOADING: {
       return update(store, {
-        isLoadingMessages: {
+        isLoadingChats: {
           $set: false,
         },
       });

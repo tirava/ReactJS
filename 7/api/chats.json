@@ -1,39 +1,74 @@
 [
   {
-    "chatId": 1,
+    "id": 1,
     "title": "Урок №1",
-    "messages": [
-      1,
-      2
+    "messageList": [
+      {
+        "id": 1,
+        "content": "Привет!",
+        "author": "Ботик",
+        "date": "2019-12-19 22:09:12"
+      },
+      {
+        "id": 2,
+        "content": "Вы в чатике 'Урок №1'",
+        "author": "Ботик",
+        "date": "2019-12-19 22:10:12"
+      }
     ]
   },
   {
-    "chatId": 2,
+    "id": 2,
     "title": "Урок №2",
-    "messages": [
-      3,
-      4
+    "messageList": [
+      {
+        "id": 3,
+        "content": "Привет!",
+        "author": "Ботик",
+        "date": "2019-12-20 22:09:12"
+      },
+      {
+        "id": 4,
+        "content": "Вы в чатике 'Урок №2'",
+        "author": "Ботик",
+        "date": "2019-12-20 22:10:12"
+      }
     ]
   },
   {
-    "chatId": 3,
+    "id": 3,
     "title": "Урок №3",
-    "messages": [
-      5
+    "messageList": [
+      {
+        "id": 5,
+        "content": "Приветик! Вы в чатике 'Урок №3'",
+        "author": "Ботик",
+        "date": "2019-12-20 22:11:12"
+      }
     ]
   },
   {
-    "chatId": 4,
-    "title": "API-4",
-    "messages": [
-      6
+    "id": 4,
+    "title": "Урок №4",
+    "messageList": [
+      {
+        "id": 6,
+        "content": "Hello from json!",
+        "author": "Botik",
+        "date": "2019-12-25 23:10:00"
+      }
     ]
   },
   {
-    "chatId": 5,
-    "title": "API-5",
-    "messages": [
-      7
+    "id": 5,
+    "title": "Урок №5",
+    "messageList": [
+      {
+        "id": 7,
+        "content": "Привет от json-а!",
+        "author": "Ботик",
+        "date": "2019-12-25 23:11:11"
+      }
     ]
   }
 ]
