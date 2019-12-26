@@ -7,7 +7,7 @@ import {ChatList} from '../../components/ChatList/ChatList';
 import PropTypes from 'prop-types';
 import './Layout.sass';
 import {sendMessage, loadMessages} from '../../actions/messageActions';
-import {addChat} from '../../actions/chatActions';
+import {addChat, loadChats} from '../../actions/chatActions';
 import {addProfile, loadProfiles} from '../../actions/profileActions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -20,13 +20,16 @@ class Layout extends Component {
     sendMessage: PropTypes.func.isRequired,
     loadMessages: PropTypes.func.isRequired,
     loadProfiles: PropTypes.func.isRequired,
+    loadChats: PropTypes.func.isRequired,
     isLoadingMessages: PropTypes.bool.isRequired,
     isLoadingProfiles: PropTypes.bool.isRequired,
+    isLoadingChats: PropTypes.bool.isRequired,
     addChat: PropTypes.func.isRequired,
     addProfile: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
+    this.props.loadChats();
     this.props.loadMessages();
     this.props.loadProfiles();
   }
@@ -105,11 +108,12 @@ const mapStateToProps = ({chatReducer, messageReducer, profileReducer}) => ({
   profiles: profileReducer.profiles,
   isLoadingMessages: messageReducer.isLoadingMessages,
   isLoadingProfiles: profileReducer.isLoadingProfiles,
+  isLoadingChats: chatReducer.isLoadingChats,
 });
 
 const mapDispatchProps = (dispatch) =>
   bindActionCreators({
-    sendMessage, loadMessages, addChat, addProfile, loadProfiles,
+    sendMessage, loadMessages, addChat, addProfile, loadProfiles, loadChats,
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchProps)(Layout);

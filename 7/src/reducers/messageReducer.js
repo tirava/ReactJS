@@ -8,33 +8,7 @@ import {
 } from '../actions/messageActions';
 
 const initialStore = {
-  messages: {
-    // 1: {
-    //   author: botName,
-    //   content: 'Привет!',
-    //   date: formatDate(),
-    // },
-    // 2: {
-    //   author: botName,
-    //   content: 'Вы в чатике \"Урок №1\"',
-    //   date: formatDate(),
-    // },
-    // 3: {
-    //   author: botName,
-    //   content: 'Привет!',
-    //   date: formatDate(),
-    // },
-    // 4: {
-    //   author: botName,
-    //   content: 'Вы в чатике \"Урок №2\"',
-    //   date: formatDate(),
-    // },
-    // 5: {
-    //   author: botName,
-    //   content: 'Приветик! Вы в чатике \"Урок №3\"',
-    //   date: formatDate(),
-    // },
-  },
+  messages: {},
   isLoadingMessages: false,
 };
 

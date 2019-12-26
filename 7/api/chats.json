@@ -1,0 +1,39 @@
+[
+  {
+    "chatId": 1,
+    "title": "Урок №1",
+    "messages": [
+      1,
+      2
+    ]
+  },
+  {
+    "chatId": 2,
+    "title": "Урок №2",
+    "messages": [
+      3,
+      4
+    ]
+  },
+  {
+    "chatId": 3,
+    "title": "Урок №3",
+    "messages": [
+      5
+    ]
+  },
+  {
+    "chatId": 4,
+    "title": "API-4",
+    "messages": [
+      6
+    ]
+  },
+  {
+    "chatId": 5,
+    "title": "API-5",
+    "messages": [
+      7
+    ]
+  }
+]

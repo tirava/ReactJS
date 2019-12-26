@@ -8,9 +8,9 @@ export const addProfile = (title, description) => ({
   description,
 });
 
-export const START_PROFILES_LOADING = '@@message/START_PROFILES_LOADING';
-export const SUCCESS_PROFILES_LOADING = '@@message/SUCCESS_PROFILES_LOADING';
-export const ERROR_PROFILES_LOADING = '@@message/ERROR_PROFILES_LOADING';
+export const START_PROFILES_LOADING = '@@profile/START_PROFILES_LOADING';
+export const SUCCESS_PROFILES_LOADING = '@@profile/SUCCESS_PROFILES_LOADING';
+export const ERROR_PROFILES_LOADING = '@@profile/ERROR_PROFILES_LOADING';
 
 export const loadProfiles = () => ({
   [RSAA]: {

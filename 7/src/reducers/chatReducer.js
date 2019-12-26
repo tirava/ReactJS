@@ -1,23 +1,17 @@
 import update from 'react-addons-update';
 import {getNullCountObject} from '../utils/utils';
-import {ADD_CHAT, DELETE_CHAT} from '../actions/chatActions';
 import {
-  SEND_MESSAGE,
-  DELETE_MESSAGE,
-  SUCCESS_MESSAGES_LOADING,
-} from '../actions/messageActions';
+  ADD_CHAT,
+  DELETE_CHAT,
+  START_CHATS_LOADING,
+  SUCCESS_CHATS_LOADING,
+  ERROR_CHATS_LOADING,
+} from '../actions/chatActions';
+import {SEND_MESSAGE, DELETE_MESSAGE} from '../actions/messageActions';
 
 const initialStore = {
-  chats: {
-    // 1: {title: 'Урок №1', messageList: [1, 2]},
-    // 2: {title: 'Урок №2', messageList: [3, 4]},
-    // 3: {title: 'Урок №3', messageList: [5]},
-    1: {title: 'Урок №1', messageList: []},
-    2: {title: 'Урок №2', messageList: []},
-    3: {title: 'Урок №3', messageList: []},
-    4: {title: 'API-4', messageList: []},
-    5: {title: 'API-5', messageList: []},
-  },
+  chats: {},
+  isLoadingChats: false,
 };
 
 export default function chatReducer(store = initialStore, action) {
@@ -88,17 +82,34 @@ export default function chatReducer(store = initialStore, action) {
         },
       });
     }
-    case SUCCESS_MESSAGES_LOADING: {
-      const chats = {...store.chats};
+    case START_CHATS_LOADING: {
+      return update(store, {
+        isLoadingChats: {
+          $set: true,
+        },
+      });
+    }
+    case SUCCESS_CHATS_LOADING: {
+      const chats = {};
       action.payload.forEach((msg) => {
-        const {id, chatId} = msg;
-        chats[chatId].messageList.push(id);
+        const chat = {title: '', messageList: []};
+        const {chatId, title, messages} = msg;
+        chat.title = title;
+        chat.messageList.push(...messages);
+        chats[chatId] = chat;
       });
       return update(store, {
         chats: {
           $set: chats,
         },
         isLoadingMessages: {
+          $set: false,
+        },
+      });
+    }
+    case ERROR_CHATS_LOADING: {
+      return update(store, {
+        isLoadingChats: {
           $set: false,
         },
       });
