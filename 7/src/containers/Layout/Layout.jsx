@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import './Layout.sass';
 import {sendMessage, loadMessages} from '../../actions/messageActions';
 import {addChat} from '../../actions/chatActions';
-import {addProfile} from '../../actions/profileActions';
+import {addProfile, loadProfiles} from '../../actions/profileActions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Layout extends Component {
@@ -19,13 +19,16 @@ class Layout extends Component {
     profiles: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,
     loadMessages: PropTypes.func.isRequired,
-    isLoading: PropTypes.bool.isRequired,
+    loadProfiles: PropTypes.func.isRequired,
+    isLoadingMessages: PropTypes.bool.isRequired,
+    isLoadingProfiles: PropTypes.bool.isRequired,
     addChat: PropTypes.func.isRequired,
     addProfile: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
     this.props.loadMessages();
+    this.props.loadProfiles();
   }
 
   sendMessage = (chatId, message) => {
@@ -42,10 +45,17 @@ class Layout extends Component {
   render() {
     const {chats, messages, profiles, addChat, addProfile} = this.props;
 
-    if (this.props.isLoading) {
+    if (this.props.isLoadingMessages || this.props.isLoadingProfiles) {
       return <CircularProgress/>;
     }
 
+    if (Object.keys(chats).length === 0) {
+      return (
+        <div>
+          Нет ни одного чата!
+        </div>
+      );
+    }
     if (Object.keys(messages).length === 0) {
       return (
         <div>
@@ -53,23 +63,13 @@ class Layout extends Component {
         </div>
       );
     }
-
-    // if (Object.keys(profiles).length === 0) {
-    //   alert('Нет ни одного профиля!');
-    // }
-    //
-    // if (Object.keys(messages).length === 0) {
-    //   fetch('/api/messages.json').then((body) =>
-    //     body.json()).then((json) => {
-    //     json.forEach((msg) => {
-    //       this.props.sendMessage(msg.chatId, msg.id, {
-    //         author: msg.author,
-    //         content: msg.content,
-    //         date: msg.date,
-    //       });
-    //     });
-    //   });
-    // }
+    if (Object.keys(profiles).length === 0) {
+      return (
+        <div>
+          Нет ни одного профиля!
+        </div>
+      );
+    }
 
     // eslint-disable-next-line react/prop-types
     let {id} = this.props.match.params;
@@ -84,7 +84,7 @@ class Layout extends Component {
 
     return (
       <div className='layout'>
-        {/*<Header chatId={id} profiles={profiles}/>*/}
+        <Header chatId={id} profiles={profiles}/>
         <div className='chat-mess'>
           <ChatList chatId={id} chats={chats}
                     addChat={addChat} addProfile={addProfile}
@@ -103,12 +103,13 @@ const mapStateToProps = ({chatReducer, messageReducer, profileReducer}) => ({
   chats: chatReducer.chats,
   messages: messageReducer.messages,
   profiles: profileReducer.profiles,
-  isLoading: messageReducer.isLoading,
+  isLoadingMessages: messageReducer.isLoadingMessages,
+  isLoadingProfiles: profileReducer.isLoadingProfiles,
 });
 
 const mapDispatchProps = (dispatch) =>
   bindActionCreators({
-    sendMessage, loadMessages, addChat, addProfile,
+    sendMessage, loadMessages, addChat, addProfile, loadProfiles,
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchProps)(Layout);

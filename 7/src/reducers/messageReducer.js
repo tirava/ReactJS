@@ -6,8 +6,6 @@ import {
   SUCCESS_MESSAGES_LOADING,
   ERROR_MESSAGES_LOADING,
 } from '../actions/messageActions';
-// import {formatDate} from '../utils/utils';
-// import {botName} from '../utils/constants';
 
 const initialStore = {
   messages: {
@@ -37,7 +35,7 @@ const initialStore = {
     //   date: formatDate(),
     // },
   },
-  isLoading: false,
+  isLoadingMessages: false,
 };
 
 export default function messageReducer(store = initialStore, action) {
@@ -66,10 +64,8 @@ export default function messageReducer(store = initialStore, action) {
       });
     }
     case START_MESSAGES_LOADING: {
-      setTimeout(function() {
-      }, 1000);
       return update(store, {
-        isLoading: {
+        isLoadingMessages: {
           $set: true,
         },
       });
@@ -78,20 +74,20 @@ export default function messageReducer(store = initialStore, action) {
       const messages = {};
       action.payload.forEach((msg) => {
         const {id, author, content, date} = msg;
-        messages[id] = {author, content};
+        messages[id] = {author, content, date};
       });
       return update(store, {
         messages: {
           $set: messages,
         },
-        isLoading: {
+        isLoadingMessages: {
           $set: false,
         },
       });
     }
     case ERROR_MESSAGES_LOADING: {
       return update(store, {
-        isLoading: {
+        isLoadingMessages: {
           $set: false,
         },
       });

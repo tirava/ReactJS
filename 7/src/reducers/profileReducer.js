@@ -1,5 +1,10 @@
 import update from 'react-addons-update';
-import {ADD_PROFILE} from '../actions/profileActions';
+import {
+  ADD_PROFILE,
+  START_PROFILES_LOADING,
+  SUCCESS_PROFILES_LOADING,
+  ERROR_PROFILES_LOADING,
+} from '../actions/profileActions';
 import {DELETE_CHAT} from '../actions/chatActions';
 import {getNullCountObject} from '../utils/utils';
 
@@ -9,6 +14,7 @@ const initialStore = {
     // 2: {title: 'Урок №2', description: 'Погружение в React'},
     // 3: {title: 'Урок №3', description: 'Изучаем Redux'},
   },
+  isLoadingProfiles: false,
 };
 
 export default function profileReducer(store = initialStore, action) {
@@ -36,6 +42,35 @@ export default function profileReducer(store = initialStore, action) {
           $merge: {
             [action.chatId]: null,
           },
+        },
+      });
+    }
+    case START_PROFILES_LOADING: {
+      return update(store, {
+        isLoadingProfiles: {
+          $set: true,
+        },
+      });
+    }
+    case SUCCESS_PROFILES_LOADING: {
+      const profiles = {};
+      action.payload.forEach((msg) => {
+        const {chatId, title, description} = msg;
+        profiles[chatId] = {title, description};
+      });
+      return update(store, {
+        profiles: {
+          $set: profiles,
+        },
+        isLoadingProfiles: {
+          $set: false,
+        },
+      });
+    }
+    case ERROR_PROFILES_LOADING: {
+      return update(store, {
+        isLoadingProfiles: {
+          $set: false,
         },
       });
     }

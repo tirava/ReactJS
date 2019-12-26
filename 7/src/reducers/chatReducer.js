@@ -98,7 +98,7 @@ export default function chatReducer(store = initialStore, action) {
         chats: {
           $set: chats,
         },
-        isLoading: {
+        isLoadingMessages: {
           $set: false,
         },
       });

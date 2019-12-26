@@ -18,7 +18,7 @@ export class Header extends Component {
     return (
       <div className='header'>
         <h2>Наш супер-пупер чатик )</h2>
-        <Link className='profile-link' to={'/profile/' + chatId}>
+        <Link className='profile-link' to={'/profile/' + chatId} target='new'>
           {title}: {description}
         </Link>
       </div>
