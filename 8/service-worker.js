@@ -1,9 +1,9 @@
 // set true in prod
-const doCache = false;
+const doCache = true;
 
 const CACHE_NAME = 'react-chat-cache';
 
-self.addEventListener('activare', (event) => {
+self.addEventListener('activate', (event) => {
   const cacheWhiteList = [CACHE_NAME];
   event.waitUntil(
     caches.keys()
@@ -23,7 +23,7 @@ self.addEventListener('install', function(event) {
     event.waitUntil(
       caches.open(CACHE_NAME)
         .then(function(cache) {
-          fetch('manifest/manifest.json')
+          fetch('../manifest/manifest.json')
             .then((response) => {
               response.json();
             })
